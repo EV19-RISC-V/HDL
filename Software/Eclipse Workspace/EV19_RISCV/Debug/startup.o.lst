@@ -1,0 +1,70 @@
+   1              	# 1 "../startup.S"
+   1              	
+   0              	
+   0              	
+   2              	.section .init
+   3              	
+   4              	.global _start
+   5              	_start:
+   6              	
+   7              	# Copies the .data from ROM to RAM - this is only used by the bootloader, which runs from ROM:
+   8              	#ifdef COPY_DATA_TO_RAM
+   9              	.hidden copy_data
+  10              	copy_data:
+  11              		la x1, __text_end	# Copy source address
+  12              		la x2, __data_begin	# Copy destination address
+  13              		la x3, __data_end	# Copy destination end address
+  14              	
+  15              		beq x2, x3, 2f		# Skip if there is no data to copy
+  16              	
+  17              	1:
+  18              		lb x4, (x1)
+  19              		sb x4, (x2)
+  20              		addi x1, x1, 1
+  21              		addi x2, x2, 1
+  22              	
+  23              		bne x2, x3, 1b		# Repeat as long as there is more data to copy
+  24              	2:
+  25              	#endif
+  26              	
+  27              	# Clears the .bss (zero initialized data) section:
+  28              	.hidden clear_bss
+  29              	clear_bss:
+  30 0000 97000000 		la x1, __bss_begin
+  30      93800000 
+  31 0008 17010000 		la x2, __bss_end
+  31      13010100 
+  32 0010 63882000 		beq x1, x2, 2f		# Skip if there is no .bss section
+  33              	
+  34              	1:
+  35 0014 23A00000 		sw x0, (x1)
+  36 0018 93804000 		addi x1, x1, 4
+  37 001c E39C20FE 		bne x1, x2, 1b
+  38              	2:
+  39              	
+  40              	# Sets up the stack pointer:
+  41              	.hidden init_stack
+  42              	init_stack:
+  43 0020 17010000 		la sp, __stack_top
+  43      13010100 
+  44              	
+  45              	.hidden call_main
+  46              	call_main:
+  47 0028 97000000 		call main
+  47      E7800000 
+DEFINED SYMBOLS
+        ../startup.S:5      .init:0000000000000000 _start
+        ../startup.S:29     .init:0000000000000000 clear_bss
+        ../startup.S:42     .init:0000000000000020 init_stack
+        ../startup.S:46     .init:0000000000000028 call_main
+        ../startup.S:30     .init:0000000000000000 .L0 
+        ../startup.S:31     .init:0000000000000008 .L0 
+        ../startup.S:43     .init:0000000000000020 .L0 
+        ../startup.S:38     .init:0000000000000020 .L21
+        ../startup.S:34     .init:0000000000000014 .L11
+
+UNDEFINED SYMBOLS
+__bss_begin
+__bss_end
+__stack_top
+main

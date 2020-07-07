@@ -1,0 +1,4 @@
+05:01:16 **** Clean-only build of configuration Debug for project EV19_RISCV ****
+make clean 
+rm -rf  ./libfixmath/fix16.o ./libfixmath/fix16_exp.o ./libfixmath/fix16_sqrt.o ./libfixmath/fix16_trig.o ./libfixmath/fract32.o ./libfixmath/uint32.o  ./Drivers/Keyboard.o ./Drivers/PS2.o  ./main.o ./startup.o  EV19_RISCV.hex  EV19_RISCV.lst  EV19_RISCV.siz  ./startup.d  ./libfixmath/fix16.d ./libfixmath/fix16_exp.d ./libfixmath/fix16_sqrt.d ./libfixmath/fix16_trig.d ./libfixmath/fract32.d ./libfixmath/uint32.d  ./Drivers/Keyboard.d ./Drivers/PS2.d  ./main.d  EV19_RISCV.elf
+ 

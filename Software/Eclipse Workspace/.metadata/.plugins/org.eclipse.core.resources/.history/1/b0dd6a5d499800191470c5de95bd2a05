@@ -1,0 +1,9 @@
+#include "./Drivers/PS2.h"
+
+
+void keyboardTest()
+{
+	PS2_Device_t dev;
+	PS2_Init(PS21,&dev);
+}
+

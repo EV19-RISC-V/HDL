@@ -1,0 +1,52 @@
+   1              		.file	"fract32.c"
+   2              		.option nopic
+   3              		.text
+   4              		.section	.text.fract32_create,"ax",@progbits
+   5              		.align	2
+   6              		.globl	fract32_create
+   8              	fract32_create:
+   9 0000 637EB500 		bleu	a1,a0,.L3
+  10 0004 1387F5FF 		addi	a4,a1,-1
+  11 0008 9307F0FF 		li	a5,-1
+  12 000c B3D7E702 		divu	a5,a5,a4
+  13 0010 3375B502 		remu	a0,a0,a1
+  14 0014 3385A702 		mul	a0,a5,a0
+  15 0018 67800000 		ret
+  16              	.L3:
+  17 001c 1305F0FF 		li	a0,-1
+  18 0020 67800000 		ret
+  20              		.section	.text.fract32_invert,"ax",@progbits
+  21              		.align	2
+  22              		.globl	fract32_invert
+  24              	fract32_invert:
+  25 0000 1345F5FF 		not	a0,a0
+  26 0004 67800000 		ret
+  28              		.section	.text.fract32_usmul,"ax",@progbits
+  29              		.align	2
+  30              		.globl	fract32_usmul
+  32              	fract32_usmul:
+  33 0000 3335B502 		mulhu	a0,a0,a1
+  34 0004 67800000 		ret
+  36              		.section	.text.fract32_smul,"ax",@progbits
+  37              		.align	2
+  38              		.globl	fract32_smul
+  40              	fract32_smul:
+  41 0000 635A0500 		bgez	a0,.L7
+  42 0004 3305A040 		sub	a0,zero,a0
+  43 0008 B325B502 		mulhsu	a1,a0,a1
+  44 000c 3305B040 		sub	a0,zero,a1
+  45 0010 67800000 		ret
+  46              	.L7:
+  47 0014 3325B502 		mulhsu	a0,a0,a1
+  48 0018 67800000 		ret
+  50              		.ident	"GCC: (GNU MCU Eclipse RISC-V Embedded GCC, 64-bit) 8.1.0"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 fract32.c
+C:\Users\Tobias\AppData\Local\Temp\ccgaB7a0.s:8      .text.fract32_create:0000000000000000 fract32_create
+C:\Users\Tobias\AppData\Local\Temp\ccgaB7a0.s:24     .text.fract32_invert:0000000000000000 fract32_invert
+C:\Users\Tobias\AppData\Local\Temp\ccgaB7a0.s:32     .text.fract32_usmul:0000000000000000 fract32_usmul
+C:\Users\Tobias\AppData\Local\Temp\ccgaB7a0.s:40     .text.fract32_smul:0000000000000000 fract32_smul
+C:\Users\Tobias\AppData\Local\Temp\ccgaB7a0.s:16     .text.fract32_create:000000000000001c .L3
+C:\Users\Tobias\AppData\Local\Temp\ccgaB7a0.s:46     .text.fract32_smul:0000000000000014 .L7
+
+NO UNDEFINED SYMBOLS

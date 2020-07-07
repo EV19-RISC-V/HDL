@@ -1,0 +1,1213 @@
+   1              		.file	"Keyboard.c"
+   2              		.option nopic
+   3              		.text
+   4              		.section	.text.get_multi_byte_make_code_index,"ax",@progbits
+   5              		.align	2
+   6              		.globl	get_multi_byte_make_code_index
+   8              	get_multi_byte_make_code_index:
+   9 0000 37070000 		lui	a4,%hi(.LANCHOR0)
+  10 0004 93070000 		li	a5,0
+  11 0008 13070700 		addi	a4,a4,%lo(.LANCHOR0)
+  12 000c 93066006 		li	a3,102
+  13              	.L3:
+  14 0010 3306F700 		add	a2,a4,a5
+  15 0014 03460600 		lbu	a2,0(a2)
+  16 0018 6306A600 		beq	a2,a0,.L1
+  17 001c 93871700 		addi	a5,a5,1
+  18 0020 E398D7FE 		bne	a5,a3,.L3
+  19              	.L1:
+  20 0024 13850700 		mv	a0,a5
+  21 0028 67800000 		ret
+  23              		.section	.text.get_single_byte_make_code_index,"ax",@progbits
+  24              		.align	2
+  25              		.globl	get_single_byte_make_code_index
+  27              	get_single_byte_make_code_index:
+  28 0000 37070000 		lui	a4,%hi(.LANCHOR1)
+  29 0004 93070000 		li	a5,0
+  30 0008 13070700 		addi	a4,a4,%lo(.LANCHOR1)
+  31 000c 93066006 		li	a3,102
+  32              	.L7:
+  33 0010 3306F700 		add	a2,a4,a5
+  34 0014 03460600 		lbu	a2,0(a2)
+  35 0018 6306A600 		beq	a2,a0,.L5
+  36 001c 93871700 		addi	a5,a5,1
+  37 0020 E398D7FE 		bne	a5,a3,.L7
+  38              	.L5:
+  39 0024 13850700 		mv	a0,a5
+  40 0028 67800000 		ret
+  42              		.section	.text.get_next_state,"ax",@progbits
+  43              		.align	2
+  44              		.globl	get_next_state
+  46              	get_next_state:
+  47 0000 23000700 		sb	zero,0(a4)
+  48 0004 93071000 		li	a5,1
+  49 0008 6308F50C 		beq	a0,a5,.L10
+  50 000c 63020502 		beqz	a0,.L11
+  51 0010 93072000 		li	a5,2
+  52 0014 630AF50E 		beq	a0,a5,.L12
+  53 0018 93073000 		li	a5,3
+  54 001c 6306F510 		beq	a0,a5,.L13
+  55 0020 93076000 		li	a5,6
+  56 0024 2320F600 		sw	a5,0(a2)
+  57 0028 13050000 		li	a0,0
+  58 002c 67800000 		ret
+  59              	.L11:
+  60 0030 130101FE 		addi	sp,sp,-32
+  61 0034 232E1100 		sw	ra,28(sp)
+  62 0038 2326E100 		sw	a4,12(sp)
+  63 003c 2324D100 		sw	a3,8(sp)
+  64 0040 2322C100 		sw	a2,4(sp)
+  65 0044 9307000E 		li	a5,224
+  66 0048 13051000 		li	a0,1
+  67 004c 638AF506 		beq	a1,a5,.L15
+  68 0050 9307000F 		li	a5,240
+  69 0054 13052000 		li	a0,2
+  70 0058 6384F506 		beq	a1,a5,.L15
+  71 005c 13850500 		mv	a0,a1
+  72 0060 2320B100 		sw	a1,0(sp)
+  73 0064 97000000 		call	get_single_byte_make_code_index
+  73      E7800000 
+  74 006c 93077002 		li	a5,39
+  75 0070 83250100 		lw	a1,0(sp)
+  76 0074 03264100 		lw	a2,4(sp)
+  77 0078 83268100 		lw	a3,8(sp)
+  78 007c 0327C100 		lw	a4,12(sp)
+  79 0080 63FEA700 		bleu	a0,a5,.L16
+  80 0084 93074004 		li	a5,68
+  81 0088 630AF500 		beq	a0,a5,.L16
+  82 008c 9307F004 		li	a5,79
+  83 0090 63FEA702 		bleu	a0,a5,.L17
+  84 0094 93076006 		li	a5,102
+  85 0098 630AF502 		beq	a0,a5,.L17
+  86              	.L16:
+  87 009c 93071000 		li	a5,1
+  88 00a0 2320F600 		sw	a5,0(a2)
+  89 00a4 B7070000 		lui	a5,%hi(.LANCHOR2)
+  90 00a8 93870700 		addi	a5,a5,%lo(.LANCHOR2)
+  91 00ac B387A700 		add	a5,a5,a0
+  92 00b0 83870700 		lb	a5,0(a5)
+  93 00b4 2300F700 		sb	a5,0(a4)
+  94              	.L27:
+  95 00b8 2380B600 		sb	a1,0(a3)
+  96 00bc 13054000 		li	a0,4
+  97              	.L15:
+  98 00c0 8320C101 		lw	ra,28(sp)
+  99 00c4 13010102 		addi	sp,sp,32
+ 100 00c8 67800000 		jr	ra
+ 101              	.L17:
+ 102 00cc 93072000 		li	a5,2
+ 103 00d0 2320F600 		sw	a5,0(a2)
+ 104 00d4 6FF05FFE 		j	.L27
+ 105              	.L10:
+ 106 00d8 93F7F50E 		andi	a5,a1,239
+ 107 00dc 1307000E 		li	a4,224
+ 108 00e0 638CE700 		beq	a5,a4,.L18
+ 109 00e4 93073000 		li	a5,3
+ 110              	.L28:
+ 111 00e8 2320F600 		sw	a5,0(a2)
+ 112 00ec 2380B600 		sb	a1,0(a3)
+ 113 00f0 13054000 		li	a0,4
+ 114 00f4 67800000 		ret
+ 115              	.L18:
+ 116 00f8 93074000 		li	a5,4
+ 117 00fc 2320F600 		sw	a5,0(a2)
+ 118 0100 13053000 		li	a0,3
+ 119 0104 67800000 		ret
+ 120              	.L12:
+ 121 0108 93F7F50E 		andi	a5,a1,239
+ 122 010c 1307000E 		li	a4,224
+ 123 0110 6386E700 		beq	a5,a4,.L19
+ 124 0114 93074000 		li	a5,4
+ 125 0118 6FF01FFD 		j	.L28
+ 126              	.L19:
+ 127 011c 93074000 		li	a5,4
+ 128              	.L29:
+ 129 0120 2320F600 		sw	a5,0(a2)
+ 130 0124 67800000 		ret
+ 131              	.L13:
+ 132 0128 93F7F50E 		andi	a5,a1,239
+ 133 012c 1307000E 		li	a4,224
+ 134 0130 6386E700 		beq	a5,a4,.L20
+ 135 0134 93075000 		li	a5,5
+ 136 0138 6FF01FFB 		j	.L28
+ 137              	.L20:
+ 138 013c 93075000 		li	a5,5
+ 139 0140 6FF01FFE 		j	.L29
+ 141              		.section	.text.Keyboard_Decode,"ax",@progbits
+ 142              		.align	2
+ 143              		.globl	Keyboard_Decode
+ 145              	Keyboard_Decode:
+ 146 0000 130101FC 		addi	sp,sp,-64
+ 147 0004 23282103 		sw	s2,48(sp)
+ 148 0008 23263103 		sw	s3,44(sp)
+ 149 000c 23244103 		sw	s4,40(sp)
+ 150 0010 23225103 		sw	s5,36(sp)
+ 151 0014 23206103 		sw	s6,32(sp)
+ 152 0018 232E7101 		sw	s7,28(sp)
+ 153 001c 232E1102 		sw	ra,60(sp)
+ 154 0020 232C8102 		sw	s0,56(sp)
+ 155 0024 232A9102 		sw	s1,52(sp)
+ 156 0028 93076000 		li	a5,6
+ 157 002c 130B0500 		mv	s6,a0
+ 158 0030 13890500 		mv	s2,a1
+ 159 0034 130A0600 		mv	s4,a2
+ 160 0038 938A0600 		mv	s5,a3
+ 161 003c A3070100 		sb	zero,15(sp)
+ 162 0040 23A0F500 		sw	a5,0(a1)
+ 163 0044 B70B0000 		lui	s7,%hi(.LANCHOR3)
+ 164 0048 93094000 		li	s3,4
+ 165              	.L33:
+ 166 004c 9305F100 		addi	a1,sp,15
+ 167 0050 13050B00 		mv	a0,s6
+ 168 0054 97000000 		call	PS2_ReadByte
+ 168      E7800000 
+ 169 005c 93040500 		mv	s1,a0
+ 170 0060 13840B00 		addi	s0,s7,%lo(.LANCHOR3)
+ 171 0064 63000504 		beqz	a0,.L31
+ 172 0068 83270400 		lw	a5,0(s0)
+ 173 006c 63840700 		beqz	a5,.L30
+ 174 0070 9304E0FF 		li	s1,-2
+ 175              	.L30:
+ 176 0074 8320C103 		lw	ra,60(sp)
+ 177 0078 03248103 		lw	s0,56(sp)
+ 178 007c 13850400 		mv	a0,s1
+ 179 0080 03290103 		lw	s2,48(sp)
+ 180 0084 83244103 		lw	s1,52(sp)
+ 181 0088 8329C102 		lw	s3,44(sp)
+ 182 008c 032A8102 		lw	s4,40(sp)
+ 183 0090 832A4102 		lw	s5,36(sp)
+ 184 0094 032B0102 		lw	s6,32(sp)
+ 185 0098 832BC101 		lw	s7,28(sp)
+ 186 009c 13010104 		addi	sp,sp,64
+ 187 00a0 67800000 		jr	ra
+ 188              	.L31:
+ 189 00a4 8345F100 		lbu	a1,15(sp)
+ 190 00a8 03250400 		lw	a0,0(s0)
+ 191 00ac 13870A00 		mv	a4,s5
+ 192 00b0 93060A00 		mv	a3,s4
+ 193 00b4 13060900 		mv	a2,s2
+ 194 00b8 97000000 		call	get_next_state
+ 194      E7800000 
+ 195 00c0 2320A400 		sw	a0,0(s0)
+ 196 00c4 E31435F9 		bne	a0,s3,.L33
+ 197 00c8 23200400 		sw	zero,0(s0)
+ 198 00cc 6FF09FFA 		j	.L30
+ 200              		.section	.text.Keyboard_SetRate,"ax",@progbits
+ 201              		.align	2
+ 202              		.globl	Keyboard_SetRate
+ 204              	Keyboard_SetRate:
+ 205 0000 130101FF 		addi	sp,sp,-16
+ 206 0004 23229100 		sw	s1,4(sp)
+ 207 0008 93840500 		mv	s1,a1
+ 208 000c 9305300F 		li	a1,243
+ 209 0010 23248100 		sw	s0,8(sp)
+ 210 0014 23261100 		sw	ra,12(sp)
+ 211 0018 13040500 		mv	s0,a0
+ 212 001c 97000000 		call	PS2_WriteByteWithAck
+ 212      E7800000 
+ 213 0024 63120502 		bnez	a0,.L40
+ 214 0028 13050400 		mv	a0,s0
+ 215 002c 03248100 		lw	s0,8(sp)
+ 216 0030 8320C100 		lw	ra,12(sp)
+ 217 0034 93F5F401 		andi	a1,s1,31
+ 218 0038 83244100 		lw	s1,4(sp)
+ 219 003c 13010101 		addi	sp,sp,16
+ 220 0040 17030000 		tail	PS2_WriteByteWithAck
+ 220      67000300 
+ 221              	.L40:
+ 222 0048 8320C100 		lw	ra,12(sp)
+ 223 004c 03248100 		lw	s0,8(sp)
+ 224 0050 83244100 		lw	s1,4(sp)
+ 225 0054 13010101 		addi	sp,sp,16
+ 226 0058 67800000 		jr	ra
+ 228              		.section	.text.Keyboard_TranslateCode,"ax",@progbits
+ 229              		.align	2
+ 230              		.globl	Keyboard_TranslateCode
+ 232              	Keyboard_TranslateCode:
+ 233 0000 130101FF 		addi	sp,sp,-16
+ 234 0004 23248100 		sw	s0,8(sp)
+ 235 0008 93070500 		mv	a5,a0
+ 236 000c 23261100 		sw	ra,12(sp)
+ 237 0010 13072000 		li	a4,2
+ 238 0014 13850500 		mv	a0,a1
+ 239 0018 13040600 		mv	s0,a2
+ 240 001c 638AE700 		beq	a5,a4,.L43
+ 241 0020 13073000 		li	a4,3
+ 242 0024 6380E704 		beq	a5,a4,.L44
+ 243 0028 13071000 		li	a4,1
+ 244 002c 6392E704 		bne	a5,a4,.L42
+ 245              	.L43:
+ 246 0030 97000000 		call	get_single_byte_make_code_index
+ 246      E7800000 
+ 247              	.L47:
+ 248 0038 B7070000 		lui	a5,%hi(.LANCHOR4)
+ 249 003c 13152500 		slli	a0,a0,2
+ 250 0040 93870700 		addi	a5,a5,%lo(.LANCHOR4)
+ 251 0044 B387A700 		add	a5,a5,a0
+ 252 0048 13050400 		mv	a0,s0
+ 253 004c 03248100 		lw	s0,8(sp)
+ 254 0050 8320C100 		lw	ra,12(sp)
+ 255 0054 83A50700 		lw	a1,0(a5)
+ 256 0058 13010101 		addi	sp,sp,16
+ 257 005c 17030000 		tail	strcpy
+ 257      67000300 
+ 258              	.L44:
+ 259 0064 97000000 		call	get_multi_byte_make_code_index
+ 259      E7800000 
+ 260 006c 6FF0DFFC 		j	.L47
+ 261              	.L42:
+ 262 0070 8320C100 		lw	ra,12(sp)
+ 263 0074 03248100 		lw	s0,8(sp)
+ 264 0078 13010101 		addi	sp,sp,16
+ 265 007c 67800000 		jr	ra
+ 267              		.section	.text.Keyboard_Reset,"ax",@progbits
+ 268              		.align	2
+ 269              		.globl	Keyboard_Reset
+ 271              	Keyboard_Reset:
+ 272 0000 130101FE 		addi	sp,sp,-32
+ 273 0004 9305F00F 		li	a1,255
+ 274 0008 232C8100 		sw	s0,24(sp)
+ 275 000c 232E1100 		sw	ra,28(sp)
+ 276 0010 13040500 		mv	s0,a0
+ 277 0014 97000000 		call	PS2_WriteByteWithAck
+ 277      E7800000 
+ 278 001c 93070500 		mv	a5,a0
+ 279 0020 63160502 		bnez	a0,.L49
+ 280 0024 9305F100 		addi	a1,sp,15
+ 281 0028 13050400 		mv	a0,s0
+ 282 002c 97000000 		call	PS2_ReadByte
+ 282      E7800000 
+ 283 0034 9307F0FF 		li	a5,-1
+ 284 0038 631A0500 		bnez	a0,.L49
+ 285 003c 8347F100 		lbu	a5,15(sp)
+ 286 0040 938767F5 		addi	a5,a5,-170
+ 287 0044 B337F000 		snez	a5,a5
+ 288 0048 B307F040 		sub	a5,zero,a5
+ 289              	.L49:
+ 290 004c 8320C101 		lw	ra,28(sp)
+ 291 0050 03248101 		lw	s0,24(sp)
+ 292 0054 13850700 		mv	a0,a5
+ 293 0058 13010102 		addi	sp,sp,32
+ 294 005c 67800000 		jr	ra
+ 296              		.globl	multi_byte_make_code
+ 297              		.globl	single_byte_make_code
+ 298              		.globl	ascii_codes
+ 299              		.globl	key_table
+ 300              		.section	.data.ascii_codes,"aw",@progbits
+ 301              		.align	2
+ 302              		.set	.LANCHOR2,. + 0
+ 305              	ascii_codes:
+ 306 0000 41       		.byte	65
+ 307 0001 42       		.byte	66
+ 308 0002 43       		.byte	67
+ 309 0003 44       		.byte	68
+ 310 0004 45       		.byte	69
+ 311 0005 46       		.byte	70
+ 312 0006 47       		.byte	71
+ 313 0007 48       		.byte	72
+ 314 0008 49       		.byte	73
+ 315 0009 4A       		.byte	74
+ 316 000a 4B       		.byte	75
+ 317 000b 4C       		.byte	76
+ 318 000c 4D       		.byte	77
+ 319 000d 4E       		.byte	78
+ 320 000e 4F       		.byte	79
+ 321 000f 50       		.byte	80
+ 322 0010 51       		.byte	81
+ 323 0011 52       		.byte	82
+ 324 0012 53       		.byte	83
+ 325 0013 54       		.byte	84
+ 326 0014 55       		.byte	85
+ 327 0015 56       		.byte	86
+ 328 0016 57       		.byte	87
+ 329 0017 58       		.byte	88
+ 330 0018 59       		.byte	89
+ 331 0019 5A       		.byte	90
+ 332 001a 30       		.byte	48
+ 333 001b 31       		.byte	49
+ 334 001c 32       		.byte	50
+ 335 001d 33       		.byte	51
+ 336 001e 34       		.byte	52
+ 337 001f 35       		.byte	53
+ 338 0020 36       		.byte	54
+ 339 0021 37       		.byte	55
+ 340 0022 38       		.byte	56
+ 341 0023 39       		.byte	57
+ 342 0024 60       		.byte	96
+ 343 0025 2D       		.byte	45
+ 344 0026 3D       		.byte	61
+ 345 0027 00       		.byte	0
+ 346 0028 08       		.byte	8
+ 347 0029 00       		.byte	0
+ 348 002a 09       		.byte	9
+ 349 002b 00       		.byte	0
+ 350 002c 00       		.byte	0
+ 351 002d 00       		.byte	0
+ 352 002e 00       		.byte	0
+ 353 002f 00       		.byte	0
+ 354 0030 00       		.byte	0
+ 355 0031 00       		.byte	0
+ 356 0032 00       		.byte	0
+ 357 0033 00       		.byte	0
+ 358 0034 00       		.byte	0
+ 359 0035 0A       		.byte	10
+ 360 0036 1B       		.byte	27
+ 361 0037 00       		.byte	0
+ 362 0038 00       		.byte	0
+ 363 0039 00       		.byte	0
+ 364 003a 00       		.byte	0
+ 365 003b 00       		.byte	0
+ 366 003c 00       		.byte	0
+ 367 003d 00       		.byte	0
+ 368 003e 00       		.byte	0
+ 369 003f 00       		.byte	0
+ 370 0040 00       		.byte	0
+ 371 0041 00       		.byte	0
+ 372 0042 00       		.byte	0
+ 373 0043 00       		.byte	0
+ 374 0044 5B       		.byte	91
+ 375 0045 00       		.byte	0
+ 376 0046 00       		.byte	0
+ 377 0047 00       		.byte	0
+ 378 0048 7F       		.byte	127
+ 379 0049 00       		.byte	0
+ 380 004a 00       		.byte	0
+ 381 004b 00       		.byte	0
+ 382 004c 00       		.byte	0
+ 383 004d 00       		.byte	0
+ 384 004e 00       		.byte	0
+ 385 004f 00       		.byte	0
+ 386 0050 2F       		.byte	47
+ 387 0051 2A       		.byte	42
+ 388 0052 2D       		.byte	45
+ 389 0053 2B       		.byte	43
+ 390 0054 0A       		.byte	10
+ 391 0055 2E       		.byte	46
+ 392 0056 30       		.byte	48
+ 393 0057 31       		.byte	49
+ 394 0058 32       		.byte	50
+ 395 0059 33       		.byte	51
+ 396 005a 34       		.byte	52
+ 397 005b 35       		.byte	53
+ 398 005c 36       		.byte	54
+ 399 005d 37       		.byte	55
+ 400 005e 38       		.byte	56
+ 401 005f 39       		.byte	57
+ 402 0060 5D       		.byte	93
+ 403 0061 3B       		.byte	59
+ 404 0062 27       		.byte	39
+ 405 0063 2C       		.byte	44
+ 406 0064 2E       		.byte	46
+ 407 0065 2F       		.byte	47
+ 408              		.section	.data.key_table,"aw",@progbits
+ 409              		.align	2
+ 410              		.set	.LANCHOR4,. + 0
+ 413              	key_table:
+ 414 0000 00000000 		.word	.LC0
+ 415 0004 00000000 		.word	.LC1
+ 416 0008 00000000 		.word	.LC2
+ 417 000c 00000000 		.word	.LC3
+ 418 0010 00000000 		.word	.LC4
+ 419 0014 00000000 		.word	.LC5
+ 420 0018 00000000 		.word	.LC6
+ 421 001c 00000000 		.word	.LC7
+ 422 0020 00000000 		.word	.LC8
+ 423 0024 00000000 		.word	.LC9
+ 424 0028 00000000 		.word	.LC10
+ 425 002c 00000000 		.word	.LC11
+ 426 0030 00000000 		.word	.LC12
+ 427 0034 00000000 		.word	.LC13
+ 428 0038 00000000 		.word	.LC14
+ 429 003c 00000000 		.word	.LC15
+ 430 0040 00000000 		.word	.LC16
+ 431 0044 00000000 		.word	.LC17
+ 432 0048 00000000 		.word	.LC18
+ 433 004c 00000000 		.word	.LC19
+ 434 0050 00000000 		.word	.LC20
+ 435 0054 00000000 		.word	.LC21
+ 436 0058 00000000 		.word	.LC22
+ 437 005c 00000000 		.word	.LC23
+ 438 0060 00000000 		.word	.LC24
+ 439 0064 00000000 		.word	.LC25
+ 440 0068 00000000 		.word	.LC26
+ 441 006c 00000000 		.word	.LC27
+ 442 0070 00000000 		.word	.LC28
+ 443 0074 00000000 		.word	.LC29
+ 444 0078 00000000 		.word	.LC30
+ 445 007c 00000000 		.word	.LC31
+ 446 0080 00000000 		.word	.LC32
+ 447 0084 00000000 		.word	.LC33
+ 448 0088 00000000 		.word	.LC34
+ 449 008c 00000000 		.word	.LC35
+ 450 0090 00000000 		.word	.LC36
+ 451 0094 00000000 		.word	.LC37
+ 452 0098 00000000 		.word	.LC38
+ 453 009c 00000000 		.word	.LC39
+ 454 00a0 00000000 		.word	.LC40
+ 455 00a4 00000000 		.word	.LC41
+ 456 00a8 00000000 		.word	.LC42
+ 457 00ac 00000000 		.word	.LC43
+ 458 00b0 00000000 		.word	.LC44
+ 459 00b4 00000000 		.word	.LC45
+ 460 00b8 00000000 		.word	.LC46
+ 461 00bc 00000000 		.word	.LC47
+ 462 00c0 00000000 		.word	.LC48
+ 463 00c4 00000000 		.word	.LC49
+ 464 00c8 00000000 		.word	.LC50
+ 465 00cc 00000000 		.word	.LC51
+ 466 00d0 00000000 		.word	.LC52
+ 467 00d4 00000000 		.word	.LC53
+ 468 00d8 00000000 		.word	.LC54
+ 469 00dc 00000000 		.word	.LC55
+ 470 00e0 00000000 		.word	.LC56
+ 471 00e4 00000000 		.word	.LC57
+ 472 00e8 00000000 		.word	.LC58
+ 473 00ec 00000000 		.word	.LC59
+ 474 00f0 00000000 		.word	.LC60
+ 475 00f4 00000000 		.word	.LC61
+ 476 00f8 00000000 		.word	.LC62
+ 477 00fc 00000000 		.word	.LC63
+ 478 0100 00000000 		.word	.LC64
+ 479 0104 00000000 		.word	.LC65
+ 480 0108 00000000 		.word	.LC66
+ 481 010c 00000000 		.word	.LC67
+ 482 0110 00000000 		.word	.LC68
+ 483 0114 00000000 		.word	.LC69
+ 484 0118 00000000 		.word	.LC70
+ 485 011c 00000000 		.word	.LC71
+ 486 0120 00000000 		.word	.LC72
+ 487 0124 00000000 		.word	.LC73
+ 488 0128 00000000 		.word	.LC74
+ 489 012c 00000000 		.word	.LC75
+ 490 0130 00000000 		.word	.LC76
+ 491 0134 00000000 		.word	.LC77
+ 492 0138 00000000 		.word	.LC78
+ 493 013c 00000000 		.word	.LC79
+ 494 0140 00000000 		.word	.LC80
+ 495 0144 00000000 		.word	.LC81
+ 496 0148 00000000 		.word	.LC82
+ 497 014c 00000000 		.word	.LC83
+ 498 0150 00000000 		.word	.LC84
+ 499 0154 00000000 		.word	.LC85
+ 500 0158 00000000 		.word	.LC86
+ 501 015c 00000000 		.word	.LC87
+ 502 0160 00000000 		.word	.LC88
+ 503 0164 00000000 		.word	.LC89
+ 504 0168 00000000 		.word	.LC90
+ 505 016c 00000000 		.word	.LC91
+ 506 0170 00000000 		.word	.LC92
+ 507 0174 00000000 		.word	.LC93
+ 508 0178 00000000 		.word	.LC94
+ 509 017c 00000000 		.word	.LC95
+ 510 0180 00000000 		.word	.LC96
+ 511 0184 00000000 		.word	.LC97
+ 512 0188 00000000 		.word	.LC98
+ 513 018c 00000000 		.word	.LC99
+ 514 0190 00000000 		.word	.LC100
+ 515 0194 00000000 		.word	.LC101
+ 516              		.section	.data.multi_byte_make_code,"aw",@progbits
+ 517              		.align	2
+ 518              		.set	.LANCHOR0,. + 0
+ 521              	multi_byte_make_code:
+ 522 0000 00       		.byte	0
+ 523 0001 00       		.byte	0
+ 524 0002 00       		.byte	0
+ 525 0003 00       		.byte	0
+ 526 0004 00       		.byte	0
+ 527 0005 00       		.byte	0
+ 528 0006 00       		.byte	0
+ 529 0007 00       		.byte	0
+ 530 0008 00       		.byte	0
+ 531 0009 00       		.byte	0
+ 532 000a 00       		.byte	0
+ 533 000b 00       		.byte	0
+ 534 000c 00       		.byte	0
+ 535 000d 00       		.byte	0
+ 536 000e 00       		.byte	0
+ 537 000f 00       		.byte	0
+ 538 0010 00       		.byte	0
+ 539 0011 00       		.byte	0
+ 540 0012 00       		.byte	0
+ 541 0013 00       		.byte	0
+ 542 0014 00       		.byte	0
+ 543 0015 00       		.byte	0
+ 544 0016 00       		.byte	0
+ 545 0017 00       		.byte	0
+ 546 0018 00       		.byte	0
+ 547 0019 00       		.byte	0
+ 548 001a 00       		.byte	0
+ 549 001b 00       		.byte	0
+ 550 001c 00       		.byte	0
+ 551 001d 00       		.byte	0
+ 552 001e 00       		.byte	0
+ 553 001f 00       		.byte	0
+ 554 0020 00       		.byte	0
+ 555 0021 00       		.byte	0
+ 556 0022 00       		.byte	0
+ 557 0023 00       		.byte	0
+ 558 0024 00       		.byte	0
+ 559 0025 00       		.byte	0
+ 560 0026 00       		.byte	0
+ 561 0027 00       		.byte	0
+ 562 0028 00       		.byte	0
+ 563 0029 00       		.byte	0
+ 564 002a 00       		.byte	0
+ 565 002b 00       		.byte	0
+ 566 002c 00       		.byte	0
+ 567 002d 00       		.byte	0
+ 568 002e 1F       		.byte	31
+ 569 002f 00       		.byte	0
+ 570 0030 00       		.byte	0
+ 571 0031 14       		.byte	20
+ 572 0032 27       		.byte	39
+ 573 0033 11       		.byte	17
+ 574 0034 2F       		.byte	47
+ 575 0035 00       		.byte	0
+ 576 0036 00       		.byte	0
+ 577 0037 00       		.byte	0
+ 578 0038 00       		.byte	0
+ 579 0039 00       		.byte	0
+ 580 003a 00       		.byte	0
+ 581 003b 00       		.byte	0
+ 582 003c 00       		.byte	0
+ 583 003d 00       		.byte	0
+ 584 003e 00       		.byte	0
+ 585 003f 00       		.byte	0
+ 586 0040 00       		.byte	0
+ 587 0041 00       		.byte	0
+ 588 0042 00       		.byte	0
+ 589 0043 00       		.byte	0
+ 590 0044 00       		.byte	0
+ 591 0045 70       		.byte	112
+ 592 0046 6C       		.byte	108
+ 593 0047 7D       		.byte	125
+ 594 0048 71       		.byte	113
+ 595 0049 69       		.byte	105
+ 596 004a 7A       		.byte	122
+ 597 004b 75       		.byte	117
+ 598 004c 6B       		.byte	107
+ 599 004d 72       		.byte	114
+ 600 004e 74       		.byte	116
+ 601 004f 00       		.byte	0
+ 602 0050 4A       		.byte	74
+ 603 0051 00       		.byte	0
+ 604 0052 00       		.byte	0
+ 605 0053 00       		.byte	0
+ 606 0054 5A       		.byte	90
+ 607 0055 00       		.byte	0
+ 608 0056 00       		.byte	0
+ 609 0057 00       		.byte	0
+ 610 0058 00       		.byte	0
+ 611 0059 00       		.byte	0
+ 612 005a 00       		.byte	0
+ 613 005b 00       		.byte	0
+ 614 005c 00       		.byte	0
+ 615 005d 00       		.byte	0
+ 616 005e 00       		.byte	0
+ 617 005f 00       		.byte	0
+ 618 0060 00       		.byte	0
+ 619 0061 00       		.byte	0
+ 620 0062 00       		.byte	0
+ 621 0063 00       		.byte	0
+ 622 0064 00       		.byte	0
+ 623 0065 00       		.byte	0
+ 624              		.section	.data.single_byte_make_code,"aw",@progbits
+ 625              		.align	2
+ 626              		.set	.LANCHOR1,. + 0
+ 629              	single_byte_make_code:
+ 630 0000 1C       		.byte	28
+ 631 0001 32       		.byte	50
+ 632 0002 21       		.byte	33
+ 633 0003 23       		.byte	35
+ 634 0004 24       		.byte	36
+ 635 0005 2B       		.byte	43
+ 636 0006 34       		.byte	52
+ 637 0007 33       		.byte	51
+ 638 0008 43       		.byte	67
+ 639 0009 3B       		.byte	59
+ 640 000a 42       		.byte	66
+ 641 000b 4B       		.byte	75
+ 642 000c 3A       		.byte	58
+ 643 000d 31       		.byte	49
+ 644 000e 44       		.byte	68
+ 645 000f 4D       		.byte	77
+ 646 0010 15       		.byte	21
+ 647 0011 2D       		.byte	45
+ 648 0012 1B       		.byte	27
+ 649 0013 2C       		.byte	44
+ 650 0014 3C       		.byte	60
+ 651 0015 2A       		.byte	42
+ 652 0016 1D       		.byte	29
+ 653 0017 22       		.byte	34
+ 654 0018 35       		.byte	53
+ 655 0019 1A       		.byte	26
+ 656 001a 45       		.byte	69
+ 657 001b 16       		.byte	22
+ 658 001c 1E       		.byte	30
+ 659 001d 26       		.byte	38
+ 660 001e 25       		.byte	37
+ 661 001f 2E       		.byte	46
+ 662 0020 36       		.byte	54
+ 663 0021 3D       		.byte	61
+ 664 0022 3E       		.byte	62
+ 665 0023 46       		.byte	70
+ 666 0024 0E       		.byte	14
+ 667 0025 4E       		.byte	78
+ 668 0026 55       		.byte	85
+ 669 0027 5D       		.byte	93
+ 670 0028 66       		.byte	102
+ 671 0029 29       		.byte	41
+ 672 002a 0D       		.byte	13
+ 673 002b 58       		.byte	88
+ 674 002c 12       		.byte	18
+ 675 002d 14       		.byte	20
+ 676 002e 00       		.byte	0
+ 677 002f 11       		.byte	17
+ 678 0030 59       		.byte	89
+ 679 0031 00       		.byte	0
+ 680 0032 00       		.byte	0
+ 681 0033 00       		.byte	0
+ 682 0034 00       		.byte	0
+ 683 0035 5A       		.byte	90
+ 684 0036 76       		.byte	118
+ 685 0037 05       		.byte	5
+ 686 0038 06       		.byte	6
+ 687 0039 04       		.byte	4
+ 688 003a 0C       		.byte	12
+ 689 003b 03       		.byte	3
+ 690 003c 0B       		.byte	11
+ 691 003d 83       		.byte	-125
+ 692 003e 0A       		.byte	10
+ 693 003f 01       		.byte	1
+ 694 0040 09       		.byte	9
+ 695 0041 78       		.byte	120
+ 696 0042 07       		.byte	7
+ 697 0043 7E       		.byte	126
+ 698 0044 54       		.byte	84
+ 699 0045 00       		.byte	0
+ 700 0046 00       		.byte	0
+ 701 0047 00       		.byte	0
+ 702 0048 00       		.byte	0
+ 703 0049 00       		.byte	0
+ 704 004a 00       		.byte	0
+ 705 004b 00       		.byte	0
+ 706 004c 00       		.byte	0
+ 707 004d 00       		.byte	0
+ 708 004e 00       		.byte	0
+ 709 004f 77       		.byte	119
+ 710 0050 00       		.byte	0
+ 711 0051 7C       		.byte	124
+ 712 0052 7B       		.byte	123
+ 713 0053 79       		.byte	121
+ 714 0054 00       		.byte	0
+ 715 0055 71       		.byte	113
+ 716 0056 70       		.byte	112
+ 717 0057 69       		.byte	105
+ 718 0058 72       		.byte	114
+ 719 0059 7A       		.byte	122
+ 720 005a 6B       		.byte	107
+ 721 005b 73       		.byte	115
+ 722 005c 74       		.byte	116
+ 723 005d 6C       		.byte	108
+ 724 005e 75       		.byte	117
+ 725 005f 7D       		.byte	125
+ 726 0060 5B       		.byte	91
+ 727 0061 4C       		.byte	76
+ 728 0062 52       		.byte	82
+ 729 0063 41       		.byte	65
+ 730 0064 49       		.byte	73
+ 731 0065 4A       		.byte	74
+ 732              		.section	.rodata.str1.4,"aMS",@progbits,1
+ 733              		.align	2
+ 734              	.LC0:
+ 735 0000 4100     		.string	"A"
+ 736 0002 0000     		.zero	2
+ 737              	.LC1:
+ 738 0004 4200     		.string	"B"
+ 739 0006 0000     		.zero	2
+ 740              	.LC2:
+ 741 0008 4300     		.string	"C"
+ 742 000a 0000     		.zero	2
+ 743              	.LC3:
+ 744 000c 4400     		.string	"D"
+ 745 000e 0000     		.zero	2
+ 746              	.LC4:
+ 747 0010 4500     		.string	"E"
+ 748 0012 0000     		.zero	2
+ 749              	.LC5:
+ 750 0014 4600     		.string	"F"
+ 751 0016 0000     		.zero	2
+ 752              	.LC6:
+ 753 0018 4700     		.string	"G"
+ 754 001a 0000     		.zero	2
+ 755              	.LC7:
+ 756 001c 4800     		.string	"H"
+ 757 001e 0000     		.zero	2
+ 758              	.LC8:
+ 759 0020 4900     		.string	"I"
+ 760 0022 0000     		.zero	2
+ 761              	.LC9:
+ 762 0024 4A00     		.string	"J"
+ 763 0026 0000     		.zero	2
+ 764              	.LC10:
+ 765 0028 4B00     		.string	"K"
+ 766 002a 0000     		.zero	2
+ 767              	.LC11:
+ 768 002c 4C00     		.string	"L"
+ 769 002e 0000     		.zero	2
+ 770              	.LC12:
+ 771 0030 4D00     		.string	"M"
+ 772 0032 0000     		.zero	2
+ 773              	.LC13:
+ 774 0034 4E00     		.string	"N"
+ 775 0036 0000     		.zero	2
+ 776              	.LC14:
+ 777 0038 4F00     		.string	"O"
+ 778 003a 0000     		.zero	2
+ 779              	.LC15:
+ 780 003c 5000     		.string	"P"
+ 781 003e 0000     		.zero	2
+ 782              	.LC16:
+ 783 0040 5100     		.string	"Q"
+ 784 0042 0000     		.zero	2
+ 785              	.LC17:
+ 786 0044 5200     		.string	"R"
+ 787 0046 0000     		.zero	2
+ 788              	.LC18:
+ 789 0048 5300     		.string	"S"
+ 790 004a 0000     		.zero	2
+ 791              	.LC19:
+ 792 004c 5400     		.string	"T"
+ 793 004e 0000     		.zero	2
+ 794              	.LC20:
+ 795 0050 5500     		.string	"U"
+ 796 0052 0000     		.zero	2
+ 797              	.LC21:
+ 798 0054 5600     		.string	"V"
+ 799 0056 0000     		.zero	2
+ 800              	.LC22:
+ 801 0058 5700     		.string	"W"
+ 802 005a 0000     		.zero	2
+ 803              	.LC23:
+ 804 005c 5800     		.string	"X"
+ 805 005e 0000     		.zero	2
+ 806              	.LC24:
+ 807 0060 5900     		.string	"Y"
+ 808 0062 0000     		.zero	2
+ 809              	.LC25:
+ 810 0064 5A00     		.string	"Z"
+ 811 0066 0000     		.zero	2
+ 812              	.LC26:
+ 813 0068 3000     		.string	"0"
+ 814 006a 0000     		.zero	2
+ 815              	.LC27:
+ 816 006c 3100     		.string	"1"
+ 817 006e 0000     		.zero	2
+ 818              	.LC28:
+ 819 0070 3200     		.string	"2"
+ 820 0072 0000     		.zero	2
+ 821              	.LC29:
+ 822 0074 3300     		.string	"3"
+ 823 0076 0000     		.zero	2
+ 824              	.LC30:
+ 825 0078 3400     		.string	"4"
+ 826 007a 0000     		.zero	2
+ 827              	.LC31:
+ 828 007c 3500     		.string	"5"
+ 829 007e 0000     		.zero	2
+ 830              	.LC32:
+ 831 0080 3600     		.string	"6"
+ 832 0082 0000     		.zero	2
+ 833              	.LC33:
+ 834 0084 3700     		.string	"7"
+ 835 0086 0000     		.zero	2
+ 836              	.LC34:
+ 837 0088 3800     		.string	"8"
+ 838 008a 0000     		.zero	2
+ 839              	.LC35:
+ 840 008c 3900     		.string	"9"
+ 841 008e 0000     		.zero	2
+ 842              	.LC36:
+ 843 0090 6000     		.string	"`"
+ 844 0092 0000     		.zero	2
+ 845              	.LC37:
+ 846 0094 2D00     		.string	"-"
+ 847 0096 0000     		.zero	2
+ 848              	.LC38:
+ 849 0098 3D00     		.string	"="
+ 850 009a 0000     		.zero	2
+ 851              	.LC39:
+ 852 009c 5C00     		.string	"\\"
+ 853 009e 0000     		.zero	2
+ 854              	.LC40:
+ 855 00a0 424B5350 		.string	"BKSP"
+ 855      00
+ 856 00a5 000000   		.zero	3
+ 857              	.LC41:
+ 858 00a8 53504143 		.string	"SPACE"
+ 858      4500
+ 859 00ae 0000     		.zero	2
+ 860              	.LC42:
+ 861 00b0 54414200 		.string	"TAB"
+ 862              	.LC43:
+ 863 00b4 43415053 		.string	"CAPS"
+ 863      00
+ 864 00b9 000000   		.zero	3
+ 865              	.LC44:
+ 866 00bc 4C205348 		.string	"L SHFT"
+ 866      465400
+ 867 00c3 00       		.zero	1
+ 868              	.LC45:
+ 869 00c4 4C204354 		.string	"L CTRL"
+ 869      524C00
+ 870 00cb 00       		.zero	1
+ 871              	.LC46:
+ 872 00cc 4C204755 		.string	"L GUI"
+ 872      4900
+ 873 00d2 0000     		.zero	2
+ 874              	.LC47:
+ 875 00d4 4C20414C 		.string	"L ALT"
+ 875      5400
+ 876 00da 0000     		.zero	2
+ 877              	.LC48:
+ 878 00dc 52205348 		.string	"R SHFT"
+ 878      465400
+ 879 00e3 00       		.zero	1
+ 880              	.LC49:
+ 881 00e4 52204354 		.string	"R CTRL"
+ 881      524C00
+ 882 00eb 00       		.zero	1
+ 883              	.LC50:
+ 884 00ec 52204755 		.string	"R GUI"
+ 884      4900
+ 885 00f2 0000     		.zero	2
+ 886              	.LC51:
+ 887 00f4 5220414C 		.string	"R ALT"
+ 887      5400
+ 888 00fa 0000     		.zero	2
+ 889              	.LC52:
+ 890 00fc 41505053 		.string	"APPS"
+ 890      00
+ 891 0101 000000   		.zero	3
+ 892              	.LC53:
+ 893 0104 454E5445 		.string	"ENTER"
+ 893      5200
+ 894 010a 0000     		.zero	2
+ 895              	.LC54:
+ 896 010c 45534300 		.string	"ESC"
+ 897              	.LC55:
+ 898 0110 463100   		.string	"F1"
+ 899 0113 00       		.zero	1
+ 900              	.LC56:
+ 901 0114 463200   		.string	"F2"
+ 902 0117 00       		.zero	1
+ 903              	.LC57:
+ 904 0118 463300   		.string	"F3"
+ 905 011b 00       		.zero	1
+ 906              	.LC58:
+ 907 011c 463400   		.string	"F4"
+ 908 011f 00       		.zero	1
+ 909              	.LC59:
+ 910 0120 463500   		.string	"F5"
+ 911 0123 00       		.zero	1
+ 912              	.LC60:
+ 913 0124 463600   		.string	"F6"
+ 914 0127 00       		.zero	1
+ 915              	.LC61:
+ 916 0128 463700   		.string	"F7"
+ 917 012b 00       		.zero	1
+ 918              	.LC62:
+ 919 012c 463800   		.string	"F8"
+ 920 012f 00       		.zero	1
+ 921              	.LC63:
+ 922 0130 463900   		.string	"F9"
+ 923 0133 00       		.zero	1
+ 924              	.LC64:
+ 925 0134 46313000 		.string	"F10"
+ 926              	.LC65:
+ 927 0138 46313100 		.string	"F11"
+ 928              	.LC66:
+ 929 013c 46313200 		.string	"F12"
+ 930              	.LC67:
+ 931 0140 5343524F 		.string	"SCROLL"
+ 931      4C4C00
+ 932 0147 00       		.zero	1
+ 933              	.LC68:
+ 934 0148 5B00     		.string	"["
+ 935 014a 0000     		.zero	2
+ 936              	.LC69:
+ 937 014c 494E5345 		.string	"INSERT"
+ 937      525400
+ 938 0153 00       		.zero	1
+ 939              	.LC70:
+ 940 0154 484F4D45 		.string	"HOME"
+ 940      00
+ 941 0159 000000   		.zero	3
+ 942              	.LC71:
+ 943 015c 50472055 		.string	"PG UP"
+ 943      5000
+ 944 0162 0000     		.zero	2
+ 945              	.LC72:
+ 946 0164 44454C45 		.string	"DELETE"
+ 946      544500
+ 947 016b 00       		.zero	1
+ 948              	.LC73:
+ 949 016c 454E4400 		.string	"END"
+ 950              	.LC74:
+ 951 0170 50472044 		.string	"PG DN"
+ 951      4E00
+ 952 0176 0000     		.zero	2
+ 953              	.LC75:
+ 954 0178 55204152 		.string	"U ARROW"
+ 954      524F5700 
+ 955              	.LC76:
+ 956 0180 4C204152 		.string	"L ARROW"
+ 956      524F5700 
+ 957              	.LC77:
+ 958 0188 44204152 		.string	"D ARROW"
+ 958      524F5700 
+ 959              	.LC78:
+ 960 0190 52204152 		.string	"R ARROW"
+ 960      524F5700 
+ 961              	.LC79:
+ 962 0198 4E554D00 		.string	"NUM"
+ 963              	.LC80:
+ 964 019c 4B50202F 		.string	"KP /"
+ 964      00
+ 965 01a1 000000   		.zero	3
+ 966              	.LC81:
+ 967 01a4 4B50202A 		.string	"KP *"
+ 967      00
+ 968 01a9 000000   		.zero	3
+ 969              	.LC82:
+ 970 01ac 4B50202D 		.string	"KP -"
+ 970      00
+ 971 01b1 000000   		.zero	3
+ 972              	.LC83:
+ 973 01b4 4B50202B 		.string	"KP +"
+ 973      00
+ 974 01b9 000000   		.zero	3
+ 975              	.LC84:
+ 976 01bc 4B502045 		.string	"KP ENTER"
+ 976      4E544552 
+ 976      00
+ 977 01c5 000000   		.zero	3
+ 978              	.LC85:
+ 979 01c8 4B50202E 		.string	"KP ."
+ 979      00
+ 980 01cd 000000   		.zero	3
+ 981              	.LC86:
+ 982 01d0 4B502030 		.string	"KP 0"
+ 982      00
+ 983 01d5 000000   		.zero	3
+ 984              	.LC87:
+ 985 01d8 4B502031 		.string	"KP 1"
+ 985      00
+ 986 01dd 000000   		.zero	3
+ 987              	.LC88:
+ 988 01e0 4B502032 		.string	"KP 2"
+ 988      00
+ 989 01e5 000000   		.zero	3
+ 990              	.LC89:
+ 991 01e8 4B502033 		.string	"KP 3"
+ 991      00
+ 992 01ed 000000   		.zero	3
+ 993              	.LC90:
+ 994 01f0 4B502034 		.string	"KP 4"
+ 994      00
+ 995 01f5 000000   		.zero	3
+ 996              	.LC91:
+ 997 01f8 4B502035 		.string	"KP 5"
+ 997      00
+ 998 01fd 000000   		.zero	3
+ 999              	.LC92:
+ 1000 0200 4B502036 		.string	"KP 6"
+ 1000      00
+ 1001 0205 000000   		.zero	3
+ 1002              	.LC93:
+ 1003 0208 4B502037 		.string	"KP 7"
+ 1003      00
+ 1004 020d 000000   		.zero	3
+ 1005              	.LC94:
+ 1006 0210 4B502038 		.string	"KP 8"
+ 1006      00
+ 1007 0215 000000   		.zero	3
+ 1008              	.LC95:
+ 1009 0218 4B502039 		.string	"KP 9"
+ 1009      00
+ 1010 021d 000000   		.zero	3
+ 1011              	.LC96:
+ 1012 0220 5D00     		.string	"]"
+ 1013 0222 0000     		.zero	2
+ 1014              	.LC97:
+ 1015 0224 3B00     		.string	";"
+ 1016 0226 0000     		.zero	2
+ 1017              	.LC98:
+ 1018 0228 2700     		.string	"'"
+ 1019 022a 0000     		.zero	2
+ 1020              	.LC99:
+ 1021 022c 2C00     		.string	","
+ 1022 022e 0000     		.zero	2
+ 1023              	.LC100:
+ 1024 0230 2E00     		.string	"."
+ 1025 0232 0000     		.zero	2
+ 1026              	.LC101:
+ 1027 0234 2F00     		.string	"/"
+ 1028              		.section	.sbss.state.2086,"aw",@nobits
+ 1029              		.align	2
+ 1030              		.set	.LANCHOR3,. + 0
+ 1033              	state.2086:
+ 1034 0000 00000000 		.zero	4
+ 1035              		.ident	"GCC: (GNU MCU Eclipse RISC-V Embedded GCC, 64-bit) 8.1.0"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Keyboard.c
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:8      .text.get_multi_byte_make_code_index:0000000000000000 get_multi_byte_make_code_index
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:27     .text.get_single_byte_make_code_index:0000000000000000 get_single_byte_make_code_index
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:46     .text.get_next_state:0000000000000000 get_next_state
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:145    .text.Keyboard_Decode:0000000000000000 Keyboard_Decode
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:204    .text.Keyboard_SetRate:0000000000000000 Keyboard_SetRate
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:232    .text.Keyboard_TranslateCode:0000000000000000 Keyboard_TranslateCode
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:271    .text.Keyboard_Reset:0000000000000000 Keyboard_Reset
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:521    .data.multi_byte_make_code:0000000000000000 multi_byte_make_code
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:629    .data.single_byte_make_code:0000000000000000 single_byte_make_code
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:305    .data.ascii_codes:0000000000000000 ascii_codes
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:413    .data.key_table:0000000000000000 key_table
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:302    .data.ascii_codes:0000000000000000 .LANCHOR2
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:410    .data.key_table:0000000000000000 .LANCHOR4
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:518    .data.multi_byte_make_code:0000000000000000 .LANCHOR0
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:626    .data.single_byte_make_code:0000000000000000 .LANCHOR1
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:1030   .sbss.state.2086:0000000000000000 .LANCHOR3
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:1033   .sbss.state.2086:0000000000000000 state.2086
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:19     .text.get_multi_byte_make_code_index:0000000000000024 .L1
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:13     .text.get_multi_byte_make_code_index:0000000000000010 .L3
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:38     .text.get_single_byte_make_code_index:0000000000000024 .L5
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:32     .text.get_single_byte_make_code_index:0000000000000010 .L7
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:105    .text.get_next_state:00000000000000d8 .L10
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:59     .text.get_next_state:0000000000000030 .L11
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:120    .text.get_next_state:0000000000000108 .L12
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:131    .text.get_next_state:0000000000000128 .L13
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:97     .text.get_next_state:00000000000000c0 .L15
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:86     .text.get_next_state:000000000000009c .L16
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:101    .text.get_next_state:00000000000000cc .L17
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:94     .text.get_next_state:00000000000000b8 .L27
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:115    .text.get_next_state:00000000000000f8 .L18
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:126    .text.get_next_state:000000000000011c .L19
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:110    .text.get_next_state:00000000000000e8 .L28
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:137    .text.get_next_state:000000000000013c .L20
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:128    .text.get_next_state:0000000000000120 .L29
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:188    .text.Keyboard_Decode:00000000000000a4 .L31
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:175    .text.Keyboard_Decode:0000000000000074 .L30
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:165    .text.Keyboard_Decode:000000000000004c .L33
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:221    .text.Keyboard_SetRate:0000000000000048 .L40
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:245    .text.Keyboard_TranslateCode:0000000000000030 .L43
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:258    .text.Keyboard_TranslateCode:0000000000000064 .L44
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:261    .text.Keyboard_TranslateCode:0000000000000070 .L42
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:247    .text.Keyboard_TranslateCode:0000000000000038 .L47
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:289    .text.Keyboard_Reset:000000000000004c .L49
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:734    .rodata.str1.4:0000000000000000 .LC0
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:737    .rodata.str1.4:0000000000000004 .LC1
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:740    .rodata.str1.4:0000000000000008 .LC2
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:743    .rodata.str1.4:000000000000000c .LC3
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:746    .rodata.str1.4:0000000000000010 .LC4
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:749    .rodata.str1.4:0000000000000014 .LC5
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:752    .rodata.str1.4:0000000000000018 .LC6
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:755    .rodata.str1.4:000000000000001c .LC7
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:758    .rodata.str1.4:0000000000000020 .LC8
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:761    .rodata.str1.4:0000000000000024 .LC9
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:764    .rodata.str1.4:0000000000000028 .LC10
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:767    .rodata.str1.4:000000000000002c .LC11
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:770    .rodata.str1.4:0000000000000030 .LC12
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:773    .rodata.str1.4:0000000000000034 .LC13
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:776    .rodata.str1.4:0000000000000038 .LC14
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:779    .rodata.str1.4:000000000000003c .LC15
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:782    .rodata.str1.4:0000000000000040 .LC16
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:785    .rodata.str1.4:0000000000000044 .LC17
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:788    .rodata.str1.4:0000000000000048 .LC18
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:791    .rodata.str1.4:000000000000004c .LC19
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:794    .rodata.str1.4:0000000000000050 .LC20
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:797    .rodata.str1.4:0000000000000054 .LC21
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:800    .rodata.str1.4:0000000000000058 .LC22
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:803    .rodata.str1.4:000000000000005c .LC23
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:806    .rodata.str1.4:0000000000000060 .LC24
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:809    .rodata.str1.4:0000000000000064 .LC25
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:812    .rodata.str1.4:0000000000000068 .LC26
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:815    .rodata.str1.4:000000000000006c .LC27
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:818    .rodata.str1.4:0000000000000070 .LC28
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:821    .rodata.str1.4:0000000000000074 .LC29
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:824    .rodata.str1.4:0000000000000078 .LC30
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:827    .rodata.str1.4:000000000000007c .LC31
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:830    .rodata.str1.4:0000000000000080 .LC32
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:833    .rodata.str1.4:0000000000000084 .LC33
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:836    .rodata.str1.4:0000000000000088 .LC34
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:839    .rodata.str1.4:000000000000008c .LC35
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:842    .rodata.str1.4:0000000000000090 .LC36
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:845    .rodata.str1.4:0000000000000094 .LC37
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:848    .rodata.str1.4:0000000000000098 .LC38
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:851    .rodata.str1.4:000000000000009c .LC39
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:854    .rodata.str1.4:00000000000000a0 .LC40
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:857    .rodata.str1.4:00000000000000a8 .LC41
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:860    .rodata.str1.4:00000000000000b0 .LC42
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:862    .rodata.str1.4:00000000000000b4 .LC43
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:865    .rodata.str1.4:00000000000000bc .LC44
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:868    .rodata.str1.4:00000000000000c4 .LC45
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:871    .rodata.str1.4:00000000000000cc .LC46
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:874    .rodata.str1.4:00000000000000d4 .LC47
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:877    .rodata.str1.4:00000000000000dc .LC48
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:880    .rodata.str1.4:00000000000000e4 .LC49
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:883    .rodata.str1.4:00000000000000ec .LC50
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:886    .rodata.str1.4:00000000000000f4 .LC51
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:889    .rodata.str1.4:00000000000000fc .LC52
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:892    .rodata.str1.4:0000000000000104 .LC53
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:895    .rodata.str1.4:000000000000010c .LC54
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:897    .rodata.str1.4:0000000000000110 .LC55
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:900    .rodata.str1.4:0000000000000114 .LC56
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:903    .rodata.str1.4:0000000000000118 .LC57
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:906    .rodata.str1.4:000000000000011c .LC58
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:909    .rodata.str1.4:0000000000000120 .LC59
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:912    .rodata.str1.4:0000000000000124 .LC60
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:915    .rodata.str1.4:0000000000000128 .LC61
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:918    .rodata.str1.4:000000000000012c .LC62
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:921    .rodata.str1.4:0000000000000130 .LC63
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:924    .rodata.str1.4:0000000000000134 .LC64
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:926    .rodata.str1.4:0000000000000138 .LC65
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:928    .rodata.str1.4:000000000000013c .LC66
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:930    .rodata.str1.4:0000000000000140 .LC67
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:933    .rodata.str1.4:0000000000000148 .LC68
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:936    .rodata.str1.4:000000000000014c .LC69
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:939    .rodata.str1.4:0000000000000154 .LC70
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:942    .rodata.str1.4:000000000000015c .LC71
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:945    .rodata.str1.4:0000000000000164 .LC72
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:948    .rodata.str1.4:000000000000016c .LC73
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:950    .rodata.str1.4:0000000000000170 .LC74
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:953    .rodata.str1.4:0000000000000178 .LC75
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:955    .rodata.str1.4:0000000000000180 .LC76
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:957    .rodata.str1.4:0000000000000188 .LC77
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:959    .rodata.str1.4:0000000000000190 .LC78
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:961    .rodata.str1.4:0000000000000198 .LC79
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:963    .rodata.str1.4:000000000000019c .LC80
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:966    .rodata.str1.4:00000000000001a4 .LC81
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:969    .rodata.str1.4:00000000000001ac .LC82
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:972    .rodata.str1.4:00000000000001b4 .LC83
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:975    .rodata.str1.4:00000000000001bc .LC84
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:978    .rodata.str1.4:00000000000001c8 .LC85
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:981    .rodata.str1.4:00000000000001d0 .LC86
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:984    .rodata.str1.4:00000000000001d8 .LC87
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:987    .rodata.str1.4:00000000000001e0 .LC88
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:990    .rodata.str1.4:00000000000001e8 .LC89
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:993    .rodata.str1.4:00000000000001f0 .LC90
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:996    .rodata.str1.4:00000000000001f8 .LC91
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:999    .rodata.str1.4:0000000000000200 .LC92
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:1002   .rodata.str1.4:0000000000000208 .LC93
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:1005   .rodata.str1.4:0000000000000210 .LC94
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:1008   .rodata.str1.4:0000000000000218 .LC95
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:1011   .rodata.str1.4:0000000000000220 .LC96
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:1014   .rodata.str1.4:0000000000000224 .LC97
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:1017   .rodata.str1.4:0000000000000228 .LC98
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:1020   .rodata.str1.4:000000000000022c .LC99
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:1023   .rodata.str1.4:0000000000000230 .LC100
+C:\Users\Tobias\AppData\Local\Temp\ccE5LeBJ.s:1026   .rodata.str1.4:0000000000000234 .LC101
+
+UNDEFINED SYMBOLS
+PS2_ReadByte
+PS2_WriteByteWithAck
+strcpy

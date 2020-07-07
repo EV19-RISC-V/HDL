@@ -1,0 +1,333 @@
+   1              		.file	"fix16.c"
+   2              		.option nopic
+   3              		.text
+   4              		.section	.text.fix16_add,"ax",@progbits
+   5              		.align	2
+   6              		.globl	fix16_add
+   8              	fix16_add:
+   9 0000 3307B500 		add	a4,a0,a1
+  10 0004 B345B500 		xor	a1,a0,a1
+  11 0008 63C80500 		bltz	a1,.L2
+  12 000c B347E500 		xor	a5,a0,a4
+  13 0010 37050080 		li	a0,-2147483648
+  14 0014 63C40700 		bltz	a5,.L1
+  15              	.L2:
+  16 0018 13050700 		mv	a0,a4
+  17              	.L1:
+  18 001c 67800000 		ret
+  20              		.section	.text.fix16_sub,"ax",@progbits
+  21              		.align	2
+  22              		.globl	fix16_sub
+  24              	fix16_sub:
+  25 0000 3307B540 		sub	a4,a0,a1
+  26 0004 B345B500 		xor	a1,a0,a1
+  27 0008 63D80500 		bgez	a1,.L6
+  28 000c B347E500 		xor	a5,a0,a4
+  29 0010 37050080 		li	a0,-2147483648
+  30 0014 63C40700 		bltz	a5,.L5
+  31              	.L6:
+  32 0018 13050700 		mv	a0,a4
+  33              	.L5:
+  34 001c 67800000 		ret
+  36              		.section	.text.fix16_sadd,"ax",@progbits
+  37              		.align	2
+  38              		.globl	fix16_sadd
+  40              	fix16_sadd:
+  41 0000 130101FF 		addi	sp,sp,-16
+  42 0004 23248100 		sw	s0,8(sp)
+  43 0008 23261100 		sw	ra,12(sp)
+  44 000c 13040500 		mv	s0,a0
+  45 0010 97000000 		call	fix16_add
+  45      E7800000 
+  46 0018 B7070080 		li	a5,-2147483648
+  47 001c 6316F500 		bne	a0,a5,.L9
+  48 0020 63548000 		blez	s0,.L9
+  49 0024 1345F5FF 		xori	a0,a0,-1
+  50              	.L9:
+  51 0028 8320C100 		lw	ra,12(sp)
+  52 002c 03248100 		lw	s0,8(sp)
+  53 0030 13010101 		addi	sp,sp,16
+  54 0034 67800000 		jr	ra
+  56              		.section	.text.fix16_ssub,"ax",@progbits
+  57              		.align	2
+  58              		.globl	fix16_ssub
+  60              	fix16_ssub:
+  61 0000 130101FF 		addi	sp,sp,-16
+  62 0004 23248100 		sw	s0,8(sp)
+  63 0008 23261100 		sw	ra,12(sp)
+  64 000c 13040500 		mv	s0,a0
+  65 0010 97000000 		call	fix16_sub
+  65      E7800000 
+  66 0018 B7070080 		li	a5,-2147483648
+  67 001c 6316F500 		bne	a0,a5,.L13
+  68 0020 63548000 		blez	s0,.L13
+  69 0024 1345F5FF 		xori	a0,a0,-1
+  70              	.L13:
+  71 0028 8320C100 		lw	ra,12(sp)
+  72 002c 03248100 		lw	s0,8(sp)
+  73 0030 13010101 		addi	sp,sp,16
+  74 0034 67800000 		jr	ra
+  76              		.section	.text.fix16_mul,"ax",@progbits
+  77              		.align	2
+  78              		.globl	fix16_mul
+  80              	fix16_mul:
+  81 0000 B317B502 		mulh	a5,a0,a1
+  82 0004 B305B502 		mul	a1,a0,a1
+  83 0008 13D7F740 		srai	a4,a5,15
+  84 000c 63D00704 		bgez	a5,.L18
+  85 0010 9306F0FF 		li	a3,-1
+  86 0014 37050080 		li	a0,-2147483648
+  87 0018 631ED702 		bne	a4,a3,.L17
+  88 001c 1387F5FF 		addi	a4,a1,-1
+  89 0020 B336B700 		sltu	a3,a4,a1
+  90 0024 9387F7FF 		addi	a5,a5,-1
+  91 0028 93050700 		mv	a1,a4
+  92 002c B387F600 		add	a5,a3,a5
+  93              	.L21:
+  94 0030 13D5F500 		srli	a0,a1,15
+  95 0034 93970701 		slli	a5,a5,16
+  96 0038 93D50501 		srli	a1,a1,16
+  97 003c 13751500 		andi	a0,a0,1
+  98 0040 B3E5B700 		or	a1,a5,a1
+  99 0044 3305B500 		add	a0,a0,a1
+ 100 0048 6F00C000 		j	.L17
+ 101              	.L18:
+ 102 004c 37050080 		li	a0,-2147483648
+ 103 0050 E30007FE 		beqz	a4,.L21
+ 104              	.L17:
+ 105 0054 67800000 		ret
+ 107              		.section	.text.fix16_smul,"ax",@progbits
+ 108              		.align	2
+ 109              		.globl	fix16_smul
+ 111              	fix16_smul:
+ 112 0000 130101FF 		addi	sp,sp,-16
+ 113 0004 23248100 		sw	s0,8(sp)
+ 114 0008 23229100 		sw	s1,4(sp)
+ 115 000c 23261100 		sw	ra,12(sp)
+ 116 0010 93040500 		mv	s1,a0
+ 117 0014 13840500 		mv	s0,a1
+ 118 0018 97000000 		call	fix16_mul
+ 118      E7800000 
+ 119 0020 B7070080 		li	a5,-2147483648
+ 120 0024 631CF500 		bne	a0,a5,.L24
+ 121 0028 1344F4FF 		not	s0,s0
+ 122 002c 93D4F401 		srli	s1,s1,31
+ 123 0030 1354F401 		srli	s0,s0,31
+ 124 0034 63848400 		beq	s1,s0,.L24
+ 125 0038 1345F5FF 		xori	a0,a0,-1
+ 126              	.L24:
+ 127 003c 8320C100 		lw	ra,12(sp)
+ 128 0040 03248100 		lw	s0,8(sp)
+ 129 0044 83244100 		lw	s1,4(sp)
+ 130 0048 13010101 		addi	sp,sp,16
+ 131 004c 67800000 		jr	ra
+ 133              		.globl	__clzsi2
+ 134              		.section	.text.fix16_div,"ax",@progbits
+ 135              		.align	2
+ 136              		.globl	fix16_div
+ 138              	fix16_div:
+ 139 0000 63880512 		beqz	a1,.L38
+ 140 0004 130101FE 		addi	sp,sp,-32
+ 141 0008 9357F541 		srai	a5,a0,31
+ 142 000c 232A9100 		sw	s1,20(sp)
+ 143 0010 B3C4A700 		xor	s1,a5,a0
+ 144 0014 B384F440 		sub	s1,s1,a5
+ 145 0018 93D7F541 		srai	a5,a1,31
+ 146 001c 23263101 		sw	s3,12(sp)
+ 147 0020 B3C9B700 		xor	s3,a5,a1
+ 148 0024 B389F940 		sub	s3,s3,a5
+ 149 0028 B707F0FF 		li	a5,-1048576
+ 150 002c 232C8100 		sw	s0,24(sp)
+ 151 0030 232E1100 		sw	ra,28(sp)
+ 152 0034 23282101 		sw	s2,16(sp)
+ 153 0038 23244101 		sw	s4,8(sp)
+ 154 003c 23225101 		sw	s5,4(sp)
+ 155 0040 23206101 		sw	s6,0(sp)
+ 156 0044 B3F7F900 		and	a5,s3,a5
+ 157 0048 13040000 		li	s0,0
+ 158 004c 63840702 		beqz	a5,.L30
+ 159 0050 13D41901 		srli	s0,s3,17
+ 160 0054 13041400 		addi	s0,s0,1
+ 161 0058 33D48402 		divu	s0,s1,s0
+ 162 005c B3073403 		mul	a5,s0,s3
+ 163 0060 33373403 		mulhu	a4,s0,s3
+ 164 0064 93D71701 		srli	a5,a5,17
+ 165 0068 1317F700 		slli	a4,a4,15
+ 166 006c B367F700 		or	a5,a4,a5
+ 167 0070 B384F440 		sub	s1,s1,a5
+ 168              	.L30:
+ 169 0074 13091001 		li	s2,17
+ 170 0078 93071000 		li	a5,1
+ 171 007c 6F00C000 		j	.L31
+ 172              	.L33:
+ 173 0080 93D94900 		srli	s3,s3,4
+ 174 0084 1309C9FF 		addi	s2,s2,-4
+ 175              	.L31:
+ 176 0088 13F7F900 		andi	a4,s3,15
+ 177 008c 63140700 		bnez	a4,.L32
+ 178 0090 E318F9FE 		bne	s2,a5,.L33
+ 179              	.L32:
+ 180 0094 138A0500 		mv	s4,a1
+ 181 0098 930A0500 		mv	s5,a0
+ 182 009c 130BF0FF 		li	s6,-1
+ 183 00a0 6F00C004 		j	.L35
+ 184              	.L37:
+ 185 00a4 13850400 		mv	a0,s1
+ 186 00a8 97000000 		call	__clzsi2
+ 186      E7800000 
+ 187 00b0 93070900 		mv	a5,s2
+ 188 00b4 63542501 		ble	s2,a0,.L34
+ 189 00b8 93070500 		mv	a5,a0
+ 190              	.L34:
+ 191 00bc B394F400 		sll	s1,s1,a5
+ 192 00c0 33D73403 		divu	a4,s1,s3
+ 193 00c4 3309F940 		sub	s2,s2,a5
+ 194 00c8 B3172701 		sll	a5,a4,s2
+ 195 00cc 3304F400 		add	s0,s0,a5
+ 196 00d0 B3572B01 		srl	a5,s6,s2
+ 197 00d4 93C7F7FF 		not	a5,a5
+ 198 00d8 B3F7E700 		and	a5,a5,a4
+ 199 00dc B3F43403 		remu	s1,s1,s3
+ 200 00e0 639C0704 		bnez	a5,.L40
+ 201 00e4 93941400 		slli	s1,s1,1
+ 202 00e8 1309F9FF 		addi	s2,s2,-1
+ 203              	.L35:
+ 204 00ec 63840400 		beqz	s1,.L36
+ 205 00f0 E35A09FA 		bgez	s2,.L37
+ 206              	.L36:
+ 207 00f4 13041400 		addi	s0,s0,1
+ 208 00f8 B3455A01 		xor	a1,s4,s5
+ 209 00fc 13551400 		srli	a0,s0,1
+ 210 0100 63D40500 		bgez	a1,.L28
+ 211 0104 3305A040 		sub	a0,zero,a0
+ 212              	.L28:
+ 213 0108 8320C101 		lw	ra,28(sp)
+ 214 010c 03248101 		lw	s0,24(sp)
+ 215 0110 83244101 		lw	s1,20(sp)
+ 216 0114 03290101 		lw	s2,16(sp)
+ 217 0118 8329C100 		lw	s3,12(sp)
+ 218 011c 032A8100 		lw	s4,8(sp)
+ 219 0120 832A4100 		lw	s5,4(sp)
+ 220 0124 032B0100 		lw	s6,0(sp)
+ 221 0128 13010102 		addi	sp,sp,32
+ 222 012c 67800000 		jr	ra
+ 223              	.L38:
+ 224 0130 37050080 		li	a0,-2147483648
+ 225 0134 67800000 		ret
+ 226              	.L40:
+ 227 0138 37050080 		li	a0,-2147483648
+ 228 013c 6FF0DFFC 		j	.L28
+ 230              		.section	.text.fix16_sdiv,"ax",@progbits
+ 231              		.align	2
+ 232              		.globl	fix16_sdiv
+ 234              	fix16_sdiv:
+ 235 0000 130101FF 		addi	sp,sp,-16
+ 236 0004 23248100 		sw	s0,8(sp)
+ 237 0008 23229100 		sw	s1,4(sp)
+ 238 000c 23261100 		sw	ra,12(sp)
+ 239 0010 93040500 		mv	s1,a0
+ 240 0014 13840500 		mv	s0,a1
+ 241 0018 97000000 		call	fix16_div
+ 241      E7800000 
+ 242 0020 B7070080 		li	a5,-2147483648
+ 243 0024 631CF500 		bne	a0,a5,.L49
+ 244 0028 1344F4FF 		not	s0,s0
+ 245 002c 93D4F401 		srli	s1,s1,31
+ 246 0030 1354F401 		srli	s0,s0,31
+ 247 0034 63848400 		beq	s1,s0,.L49
+ 248 0038 1345F5FF 		xori	a0,a0,-1
+ 249              	.L49:
+ 250 003c 8320C100 		lw	ra,12(sp)
+ 251 0040 03248100 		lw	s0,8(sp)
+ 252 0044 83244100 		lw	s1,4(sp)
+ 253 0048 13010101 		addi	sp,sp,16
+ 254 004c 67800000 		jr	ra
+ 256              		.section	.text.fix16_lerp8,"ax",@progbits
+ 257              		.align	2
+ 258              		.globl	fix16_lerp8
+ 260              	fix16_lerp8:
+ 261 0000 93070010 		li	a5,256
+ 262 0004 B387C740 		sub	a5,a5,a2
+ 263 0008 3385A702 		mul	a0,a5,a0
+ 264 000c B305B602 		mul	a1,a2,a1
+ 265 0010 9357F541 		srai	a5,a0,31
+ 266 0014 13D7F541 		srai	a4,a1,31
+ 267 0018 B305B500 		add	a1,a0,a1
+ 268 001c 33B5A500 		sltu	a0,a1,a0
+ 269 0020 B387E700 		add	a5,a5,a4
+ 270 0024 3305F500 		add	a0,a0,a5
+ 271 0028 93D58500 		srli	a1,a1,8
+ 272 002c 13158501 		slli	a0,a0,24
+ 273 0030 3365B500 		or	a0,a0,a1
+ 274 0034 67800000 		ret
+ 276              		.section	.text.fix16_lerp16,"ax",@progbits
+ 277              		.align	2
+ 278              		.globl	fix16_lerp16
+ 280              	fix16_lerp16:
+ 281 0000 B7070100 		li	a5,65536
+ 282 0004 B387C740 		sub	a5,a5,a2
+ 283 0008 3385A702 		mul	a0,a5,a0
+ 284 000c B305B602 		mul	a1,a2,a1
+ 285 0010 9357F541 		srai	a5,a0,31
+ 286 0014 13D7F541 		srai	a4,a1,31
+ 287 0018 B305B500 		add	a1,a0,a1
+ 288 001c 33B5A500 		sltu	a0,a1,a0
+ 289 0020 B387E700 		add	a5,a5,a4
+ 290 0024 3305F500 		add	a0,a0,a5
+ 291 0028 93D50501 		srli	a1,a1,16
+ 292 002c 13150501 		slli	a0,a0,16
+ 293 0030 3365B500 		or	a0,a0,a1
+ 294 0034 67800000 		ret
+ 296              		.section	.text.fix16_lerp32,"ax",@progbits
+ 297              		.align	2
+ 298              		.globl	fix16_lerp32
+ 300              	fix16_lerp32:
+ 301 0000 3307C040 		sub	a4,zero,a2
+ 302 0004 B307A702 		mul	a5,a4,a0
+ 303 0008 3327E502 		mulhsu	a4,a0,a4
+ 304 000c 3305B602 		mul	a0,a2,a1
+ 305 0010 33A6C502 		mulhsu	a2,a1,a2
+ 306 0014 B307F500 		add	a5,a0,a5
+ 307 0018 33B5A700 		sltu	a0,a5,a0
+ 308 001c 3306E600 		add	a2,a2,a4
+ 309 0020 3305C500 		add	a0,a0,a2
+ 310 0024 67800000 		ret
+ 312              		.ident	"GCC: (GNU MCU Eclipse RISC-V Embedded GCC, 64-bit) 8.1.0"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 fix16.c
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:8      .text.fix16_add:0000000000000000 fix16_add
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:24     .text.fix16_sub:0000000000000000 fix16_sub
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:40     .text.fix16_sadd:0000000000000000 fix16_sadd
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:60     .text.fix16_ssub:0000000000000000 fix16_ssub
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:80     .text.fix16_mul:0000000000000000 fix16_mul
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:111    .text.fix16_smul:0000000000000000 fix16_smul
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:138    .text.fix16_div:0000000000000000 fix16_div
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:234    .text.fix16_sdiv:0000000000000000 fix16_sdiv
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:260    .text.fix16_lerp8:0000000000000000 fix16_lerp8
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:280    .text.fix16_lerp16:0000000000000000 fix16_lerp16
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:300    .text.fix16_lerp32:0000000000000000 fix16_lerp32
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:15     .text.fix16_add:0000000000000018 .L2
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:17     .text.fix16_add:000000000000001c .L1
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:31     .text.fix16_sub:0000000000000018 .L6
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:33     .text.fix16_sub:000000000000001c .L5
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:50     .text.fix16_sadd:0000000000000028 .L9
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:70     .text.fix16_ssub:0000000000000028 .L13
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:101    .text.fix16_mul:000000000000004c .L18
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:104    .text.fix16_mul:0000000000000054 .L17
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:93     .text.fix16_mul:0000000000000030 .L21
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:126    .text.fix16_smul:000000000000003c .L24
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:223    .text.fix16_div:0000000000000130 .L38
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:168    .text.fix16_div:0000000000000074 .L30
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:175    .text.fix16_div:0000000000000088 .L31
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:179    .text.fix16_div:0000000000000094 .L32
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:172    .text.fix16_div:0000000000000080 .L33
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:203    .text.fix16_div:00000000000000ec .L35
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:190    .text.fix16_div:00000000000000bc .L34
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:226    .text.fix16_div:0000000000000138 .L40
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:206    .text.fix16_div:00000000000000f4 .L36
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:184    .text.fix16_div:00000000000000a4 .L37
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:212    .text.fix16_div:0000000000000108 .L28
+C:\Users\Tobias\AppData\Local\Temp\cc9xbbei.s:249    .text.fix16_sdiv:000000000000003c .L49
+
+UNDEFINED SYMBOLS
+__clzsi2
