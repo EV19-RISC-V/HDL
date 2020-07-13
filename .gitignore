@@ -54,7 +54,7 @@
 !*.cmd
 !*.pdf
 !*.png
-
+!*.md
 ## tbd
 
 !*.tcl
