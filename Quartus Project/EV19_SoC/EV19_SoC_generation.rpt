@@ -1,0 +1,259 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate "C:\Users\Tobias\Desktop\13 - EV19_RISCV (integrado en Platform Designer)\EV19_SoC.qsys" --block-symbol-file --output-directory="C:\Users\Tobias\Desktop\13 - EV19_RISCV (integrado en Platform Designer)\EV19_SoC" --family="Cyclone IV E" --part=EP4CE22F17C6
+Progress: Loading 13 - EV19_RISCV (integrado en Platform Designer)/EV19_SoC.qsys
+Progress: Reading input file
+Progress: Adding ADC [altera_up_avalon_adc 18.0]
+Progress: Parameterizing module ADC
+Progress: Adding Accelerometer [altera_up_avalon_accelerometer_spi 18.0]
+Progress: Parameterizing module Accelerometer
+Progress: Adding Clock [clock_source 18.1]
+Progress: Parameterizing module Clock
+Progress: Adding Dip_Switch [altera_avalon_pio 18.1]
+Progress: Parameterizing module Dip_Switch
+Progress: Adding EV19_Core_0 [EV19_Core 1.0]
+Progress: Parameterizing module EV19_Core_0
+Progress: Adding I2C [altera_avalon_i2c 18.1]
+Progress: Parameterizing module I2C
+Progress: Adding ID [altera_avalon_sysid_qsys 18.1]
+Progress: Parameterizing module ID
+Progress: Adding Keyboard [altera_up_avalon_ps2 18.0]
+Progress: Parameterizing module Keyboard
+Progress: Adding LEDs [altera_avalon_pio 18.1]
+Progress: Parameterizing module LEDs
+Progress: Adding Mouse [altera_up_avalon_ps2 18.0]
+Progress: Parameterizing module Mouse
+Progress: Adding PLL [altpll 18.1]
+Progress: Parameterizing module PLL
+Progress: Adding Performance_Counter [altera_avalon_performance_counter 18.1]
+Progress: Parameterizing module Performance_Counter
+Progress: Adding Push_Button [altera_avalon_pio 18.1]
+Progress: Parameterizing module Push_Button
+Progress: Adding RAM [altera_avalon_onchip_memory2 18.1]
+Progress: Parameterizing module RAM
+Progress: Adding ROM [altera_avalon_onchip_memory2 18.1]
+Progress: Parameterizing module ROM
+Progress: Adding SDRAM [altera_avalon_new_sdram_controller 18.1]
+Progress: Parameterizing module SDRAM
+Progress: Adding SPI [altera_avalon_spi 18.1]
+Progress: Parameterizing module SPI
+Progress: Adding Timer [altera_avalon_timer 18.1]
+Progress: Parameterizing module Timer
+Progress: Adding UART [altera_up_avalon_rs232 17.1]
+Progress: Parameterizing module UART
+Progress: Adding VGA [VGASubsystem 1.0]
+Progress: Reading input file
+Progress: Adding Alpha_Blender [altera_up_avalon_video_alpha_blender 18.0]
+Progress: Parameterizing module Alpha_Blender
+Progress: Adding Character_Buffer [altera_up_avalon_video_character_buffer_with_dma 18.0]
+Progress: Parameterizing module Character_Buffer
+Progress: Adding Clock_System [clock_source 18.1]
+Progress: Parameterizing module Clock_System
+Progress: Adding Clock_VGA [clock_source 18.1]
+Progress: Parameterizing module Clock_VGA
+Progress: Adding Dual_Clock_FIFO [altera_up_avalon_video_dual_clock_buffer 18.0]
+Progress: Parameterizing module Dual_Clock_FIFO
+Progress: Adding Pixel_Buffer [altera_up_avalon_video_pixel_buffer_dma 18.0]
+Progress: Parameterizing module Pixel_Buffer
+Progress: Adding Resampler [altera_up_avalon_video_rgb_resampler 18.0]
+Progress: Parameterizing module Resampler
+Progress: Adding VGA_Controller [altera_up_avalon_video_vga_controller 18.1]
+Warning: altera_up_avalon_video_vga_controller: Catalog mismatch; expected v18.0 but found v18.1
+Progress: Parameterizing module VGA_Controller
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Progress: Parameterizing module VGA
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Warning: EV19_SoC.EV19_SoC: Module dependency loop involving: "PLL" (altpll 18.1), "ADC" (altera_up_avalon_adc 18.0)
+Info: EV19_SoC.Dip_Switch: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: EV19_SoC.ID: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: EV19_SoC.ID: Time stamp will be automatically updated when this component is generated.
+Info: EV19_SoC.Push_Button: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: EV19_SoC.SDRAM: SDRAM Controller will only be supported in Quartus Prime Standard Edition in the future release.
+Info: EV19_SoC.VGA.Character_Buffer: Character Resolution: 80 x 60
+Info: EV19_SoC.VGA.Resampler: RGB Resampling: 16 (bits) x 1 (planes) -> 10 (bits) x 3 (planes)
+Info: EV19_SoC.VGA.VGA_Controller: Video Output Stream: Format: 640 x 480 with Color: 10 (bits) x 3 (planes) converted to 8 (bits) per color plane
+Warning: EV19_SoC.Keyboard: Interrupt sender Keyboard.interrupt is not connected to an interrupt receiver
+Warning: EV19_SoC.Timer: Interrupt sender Timer.irq is not connected to an interrupt receiver
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate "C:\Users\Tobias\Desktop\13 - EV19_RISCV (integrado en Platform Designer)\EV19_SoC.qsys" --synthesis=VHDL --output-directory="C:\Users\Tobias\Desktop\13 - EV19_RISCV (integrado en Platform Designer)\EV19_SoC\synthesis" --family="Cyclone IV E" --part=EP4CE22F17C6
+Progress: Loading 13 - EV19_RISCV (integrado en Platform Designer)/EV19_SoC.qsys
+Progress: Reading input file
+Progress: Adding ADC [altera_up_avalon_adc 18.0]
+Progress: Parameterizing module ADC
+Progress: Adding Accelerometer [altera_up_avalon_accelerometer_spi 18.0]
+Progress: Parameterizing module Accelerometer
+Progress: Adding Clock [clock_source 18.1]
+Progress: Parameterizing module Clock
+Progress: Adding Dip_Switch [altera_avalon_pio 18.1]
+Progress: Parameterizing module Dip_Switch
+Progress: Adding EV19_Core_0 [EV19_Core 1.0]
+Progress: Parameterizing module EV19_Core_0
+Progress: Adding I2C [altera_avalon_i2c 18.1]
+Progress: Parameterizing module I2C
+Progress: Adding ID [altera_avalon_sysid_qsys 18.1]
+Progress: Parameterizing module ID
+Progress: Adding Keyboard [altera_up_avalon_ps2 18.0]
+Progress: Parameterizing module Keyboard
+Progress: Adding LEDs [altera_avalon_pio 18.1]
+Progress: Parameterizing module LEDs
+Progress: Adding Mouse [altera_up_avalon_ps2 18.0]
+Progress: Parameterizing module Mouse
+Progress: Adding PLL [altpll 18.1]
+Progress: Parameterizing module PLL
+Progress: Adding Performance_Counter [altera_avalon_performance_counter 18.1]
+Progress: Parameterizing module Performance_Counter
+Progress: Adding Push_Button [altera_avalon_pio 18.1]
+Progress: Parameterizing module Push_Button
+Progress: Adding RAM [altera_avalon_onchip_memory2 18.1]
+Progress: Parameterizing module RAM
+Progress: Adding ROM [altera_avalon_onchip_memory2 18.1]
+Progress: Parameterizing module ROM
+Progress: Adding SDRAM [altera_avalon_new_sdram_controller 18.1]
+Progress: Parameterizing module SDRAM
+Progress: Adding SPI [altera_avalon_spi 18.1]
+Progress: Parameterizing module SPI
+Progress: Adding Timer [altera_avalon_timer 18.1]
+Progress: Parameterizing module Timer
+Progress: Adding UART [altera_up_avalon_rs232 17.1]
+Progress: Parameterizing module UART
+Progress: Adding VGA [VGASubsystem 1.0]
+Progress: Parameterizing module VGA
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Warning: EV19_SoC.EV19_SoC: Module dependency loop involving: "PLL" (altpll 18.1), "ADC" (altera_up_avalon_adc 18.0)
+Info: EV19_SoC.Dip_Switch: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: EV19_SoC.ID: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: EV19_SoC.ID: Time stamp will be automatically updated when this component is generated.
+Info: EV19_SoC.Push_Button: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: EV19_SoC.SDRAM: SDRAM Controller will only be supported in Quartus Prime Standard Edition in the future release.
+Info: EV19_SoC.VGA.Character_Buffer: Character Resolution: 80 x 60
+Info: EV19_SoC.VGA.Resampler: RGB Resampling: 16 (bits) x 1 (planes) -> 10 (bits) x 3 (planes)
+Info: EV19_SoC.VGA.VGA_Controller: Video Output Stream: Format: 640 x 480 with Color: 10 (bits) x 3 (planes) converted to 8 (bits) per color plane
+Warning: EV19_SoC.Keyboard: Interrupt sender Keyboard.interrupt is not connected to an interrupt receiver
+Warning: EV19_SoC.Timer: Interrupt sender Timer.irq is not connected to an interrupt receiver
+Info: EV19_SoC: Generating EV19_SoC "EV19_SoC" for QUARTUS_SYNTH
+Info: ADC: Starting Generation of ADC Controller for DE-series Board
+Info: ADC: C:/quartus/18.1/ip/altera/university_program/input_output/altera_up_avalon_adc/hdl/altera_up_avalon_adv_adc.v C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0002_sopcgen/EV19_SoC_ADC.v
+Info: ADC: "EV19_SoC" instantiated altera_up_avalon_adc "ADC"
+Info: Dip_Switch: Starting RTL generation for module 'EV19_SoC_Dip_Switch'
+Info: Dip_Switch:   Generation command is [exec C:/quartus/18.1/quartus/bin64/perl/bin/perl.exe -I C:/quartus/18.1/quartus/bin64/perl/lib -I C:/quartus/18.1/quartus/sopc_builder/bin/europa -I C:/quartus/18.1/quartus/sopc_builder/bin/perl_lib -I C:/quartus/18.1/quartus/sopc_builder/bin -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=EV19_SoC_Dip_Switch --dir=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0005_Dip_Switch_gen/ --quartus_dir=C:/quartus/18.1/quartus --verilog --config=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0005_Dip_Switch_gen//EV19_SoC_Dip_Switch_component_configuration.pl  --do_build_sim=0  ]
+Info: Dip_Switch: Done RTL generation for module 'EV19_SoC_Dip_Switch'
+Info: Dip_Switch: "EV19_SoC" instantiated altera_avalon_pio "Dip_Switch"
+Info: EV19_Core_0: "EV19_SoC" instantiated EV19_Core "EV19_Core_0"
+Info: ID: "EV19_SoC" instantiated altera_avalon_sysid_qsys "ID"
+Info: Keyboard: Starting Generation of PS2 Controller
+Info: Keyboard: "EV19_SoC" instantiated altera_up_avalon_ps2 "Keyboard"
+Info: LEDs: Starting RTL generation for module 'EV19_SoC_LEDs'
+Info: LEDs:   Generation command is [exec C:/quartus/18.1/quartus/bin64/perl/bin/perl.exe -I C:/quartus/18.1/quartus/bin64/perl/lib -I C:/quartus/18.1/quartus/sopc_builder/bin/europa -I C:/quartus/18.1/quartus/sopc_builder/bin/perl_lib -I C:/quartus/18.1/quartus/sopc_builder/bin -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=EV19_SoC_LEDs --dir=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0009_LEDs_gen/ --quartus_dir=C:/quartus/18.1/quartus --verilog --config=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0009_LEDs_gen//EV19_SoC_LEDs_component_configuration.pl  --do_build_sim=0  ]
+Info: LEDs: Done RTL generation for module 'EV19_SoC_LEDs'
+Info: LEDs: "EV19_SoC" instantiated altera_avalon_pio "LEDs"
+Info: PLL: "EV19_SoC" instantiated altpll "PLL"
+Info: Performance_Counter: Starting RTL generation for module 'EV19_SoC_Performance_Counter'
+Info: Performance_Counter:   Generation command is [exec C:/quartus/18.1/quartus/bin64/perl/bin/perl.exe -I C:/quartus/18.1/quartus/bin64/perl/lib -I C:/quartus/18.1/quartus/sopc_builder/bin/europa -I C:/quartus/18.1/quartus/sopc_builder/bin/perl_lib -I C:/quartus/18.1/quartus/sopc_builder/bin -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_performance_counter -- C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_performance_counter/generate_rtl.pl --name=EV19_SoC_Performance_Counter --dir=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0012_Performance_Counter_gen/ --quartus_dir=C:/quartus/18.1/quartus --verilog --config=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0012_Performance_Counter_gen//EV19_SoC_Performance_Counter_component_configuration.pl  --do_build_sim=0  ]
+Info: Performance_Counter: Done RTL generation for module 'EV19_SoC_Performance_Counter'
+Info: Performance_Counter: "EV19_SoC" instantiated altera_avalon_performance_counter "Performance_Counter"
+Info: Push_Button: Starting RTL generation for module 'EV19_SoC_Push_Button'
+Info: Push_Button:   Generation command is [exec C:/quartus/18.1/quartus/bin64/perl/bin/perl.exe -I C:/quartus/18.1/quartus/bin64/perl/lib -I C:/quartus/18.1/quartus/sopc_builder/bin/europa -I C:/quartus/18.1/quartus/sopc_builder/bin/perl_lib -I C:/quartus/18.1/quartus/sopc_builder/bin -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=EV19_SoC_Push_Button --dir=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0013_Push_Button_gen/ --quartus_dir=C:/quartus/18.1/quartus --verilog --config=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0013_Push_Button_gen//EV19_SoC_Push_Button_component_configuration.pl  --do_build_sim=0  ]
+Info: Push_Button: Done RTL generation for module 'EV19_SoC_Push_Button'
+Info: Push_Button: "EV19_SoC" instantiated altera_avalon_pio "Push_Button"
+Info: RAM: Starting RTL generation for module 'EV19_SoC_RAM'
+Info: RAM:   Generation command is [exec C:/quartus/18.1/quartus/bin64/perl/bin/perl.exe -I C:/quartus/18.1/quartus/bin64/perl/lib -I C:/quartus/18.1/quartus/sopc_builder/bin/europa -I C:/quartus/18.1/quartus/sopc_builder/bin/perl_lib -I C:/quartus/18.1/quartus/sopc_builder/bin -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=EV19_SoC_RAM --dir=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0014_RAM_gen/ --quartus_dir=C:/quartus/18.1/quartus --verilog --config=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0014_RAM_gen//EV19_SoC_RAM_component_configuration.pl  --do_build_sim=0  ]
+Info: RAM: Done RTL generation for module 'EV19_SoC_RAM'
+Info: RAM: "EV19_SoC" instantiated altera_avalon_onchip_memory2 "RAM"
+Info: ROM: Starting RTL generation for module 'EV19_SoC_ROM'
+Info: ROM:   Generation command is [exec C:/quartus/18.1/quartus/bin64/perl/bin/perl.exe -I C:/quartus/18.1/quartus/bin64/perl/lib -I C:/quartus/18.1/quartus/sopc_builder/bin/europa -I C:/quartus/18.1/quartus/sopc_builder/bin/perl_lib -I C:/quartus/18.1/quartus/sopc_builder/bin -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=EV19_SoC_ROM --dir=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0015_ROM_gen/ --quartus_dir=C:/quartus/18.1/quartus --verilog --config=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0015_ROM_gen//EV19_SoC_ROM_component_configuration.pl  --do_build_sim=0  ]
+Info: ROM: Done RTL generation for module 'EV19_SoC_ROM'
+Info: ROM: "EV19_SoC" instantiated altera_avalon_onchip_memory2 "ROM"
+Info: SDRAM: Starting RTL generation for module 'EV19_SoC_SDRAM'
+Info: SDRAM:   Generation command is [exec C:/quartus/18.1/quartus/bin64/perl/bin/perl.exe -I C:/quartus/18.1/quartus/bin64/perl/lib -I C:/quartus/18.1/quartus/sopc_builder/bin/europa -I C:/quartus/18.1/quartus/sopc_builder/bin/perl_lib -I C:/quartus/18.1/quartus/sopc_builder/bin -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=EV19_SoC_SDRAM --dir=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0016_SDRAM_gen/ --quartus_dir=C:/quartus/18.1/quartus --verilog --config=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0016_SDRAM_gen//EV19_SoC_SDRAM_component_configuration.pl  --do_build_sim=0  ]
+Info: SDRAM: Done RTL generation for module 'EV19_SoC_SDRAM'
+Info: SDRAM: "EV19_SoC" instantiated altera_avalon_new_sdram_controller "SDRAM"
+Info: Timer: Starting RTL generation for module 'EV19_SoC_Timer'
+Info: Timer:   Generation command is [exec C:/Quartus/18.1/quartus/bin64//perl/bin/perl.exe -I C:/Quartus/18.1/quartus/bin64//perl/lib -I C:/quartus/18.1/quartus/sopc_builder/bin/europa -I C:/quartus/18.1/quartus/sopc_builder/bin/perl_lib -I C:/quartus/18.1/quartus/sopc_builder/bin -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer -- C:/quartus/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer/generate_rtl.pl --name=EV19_SoC_Timer --dir=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0017_Timer_gen/ --quartus_dir=C:/quartus/18.1/quartus --verilog --config=C:/Users/Tobias/AppData/Local/Temp/alt8079_6564046255654632500.dir/0017_Timer_gen//EV19_SoC_Timer_component_configuration.pl  --do_build_sim=0  ]
+Info: Timer: Done RTL generation for module 'EV19_SoC_Timer'
+Info: Timer: "EV19_SoC" instantiated altera_avalon_timer "Timer"
+Info: VGA: "EV19_SoC" instantiated VGASubsystem "VGA"
+Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_001: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_002: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_003: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_004: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_005: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_006: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_007: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_008: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_009: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_010: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_011: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_012: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_013: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_014: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_015: Inserting error_adapter: error_adapter_0
+Info: mm_interconnect_0: "EV19_SoC" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: rst_controller: "EV19_SoC" instantiated altera_reset_controller "rst_controller"
+Info: Alpha_Blender: Starting Generation of the Alpha Blender
+Info: Alpha_Blender: "VGA" instantiated altera_up_avalon_video_alpha_blender "Alpha_Blender"
+Info: Character_Buffer: Starting Generation of Character Buffer
+Info: Character_Buffer: "VGA" instantiated altera_up_avalon_video_character_buffer_with_dma "Character_Buffer"
+Info: Dual_Clock_FIFO: Starting Generation of the Dual Clock Buffer
+Info: Dual_Clock_FIFO: "VGA" instantiated altera_up_avalon_video_dual_clock_buffer "Dual_Clock_FIFO"
+Info: Pixel_Buffer: Starting Generation of VGA Pixel Buffer
+Info: Pixel_Buffer: "VGA" instantiated altera_up_avalon_video_pixel_buffer_dma "Pixel_Buffer"
+Info: Resampler: Starting Generation of Video RGB Resampler
+Info: Resampler: "VGA" instantiated altera_up_avalon_video_rgb_resampler "Resampler"
+Info: VGA_Controller: Starting Generation of VGA Controller
+Info: VGA_Controller: "VGA" instantiated altera_up_avalon_video_vga_controller "VGA_Controller"
+Info: EV19_Core_0_Data_Master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "EV19_Core_0_Data_Master_translator"
+Info: ADC_adc_slave_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "ADC_adc_slave_translator"
+Info: EV19_Core_0_Data_Master_agent: "mm_interconnect_0" instantiated altera_merlin_master_agent "EV19_Core_0_Data_Master_agent"
+Info: ADC_adc_slave_agent: "mm_interconnect_0" instantiated altera_merlin_slave_agent "ADC_adc_slave_agent"
+Info: ADC_adc_slave_agent_rsp_fifo: "mm_interconnect_0" instantiated altera_avalon_sc_fifo "ADC_adc_slave_agent_rsp_fifo"
+Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
+Info: router_001: "mm_interconnect_0" instantiated altera_merlin_router "router_001"
+Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
+Info: router_003: "mm_interconnect_0" instantiated altera_merlin_router "router_003"
+Info: router_006: "mm_interconnect_0" instantiated altera_merlin_router "router_006"
+Info: router_016: "mm_interconnect_0" instantiated altera_merlin_router "router_016"
+Info: router_018: "mm_interconnect_0" instantiated altera_merlin_router "router_018"
+Info: VGA_char_buffersource_slave_burst_adapter: "mm_interconnect_0" instantiated altera_merlin_burst_adapter "VGA_char_buffersource_slave_burst_adapter"
+Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: cmd_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_001"
+Info: cmd_demux_002: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_002"
+Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: cmd_mux_003: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_003"
+Info: Reusing file C:/Users/Tobias/Desktop/13 - EV19_RISCV (integrado en Platform Designer)/EV19_SoC/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: cmd_mux_013: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_013"
+Info: Reusing file C:/Users/Tobias/Desktop/13 - EV19_RISCV (integrado en Platform Designer)/EV19_SoC/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: cmd_mux_015: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_015"
+Info: Reusing file C:/Users/Tobias/Desktop/13 - EV19_RISCV (integrado en Platform Designer)/EV19_SoC/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_demux_003: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_003"
+Info: rsp_demux_013: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_013"
+Info: rsp_demux_015: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_015"
+Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: Reusing file C:/Users/Tobias/Desktop/13 - EV19_RISCV (integrado en Platform Designer)/EV19_SoC/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_001"
+Info: Reusing file C:/Users/Tobias/Desktop/13 - EV19_RISCV (integrado en Platform Designer)/EV19_SoC/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_mux_002: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_002"
+Info: Reusing file C:/Users/Tobias/Desktop/13 - EV19_RISCV (integrado en Platform Designer)/EV19_SoC/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: EV19_Core_0_Data_Master_to_VGA_char_buffersource_slave_cmd_width_adapter: "mm_interconnect_0" instantiated altera_merlin_width_adapter "EV19_Core_0_Data_Master_to_VGA_char_buffersource_slave_cmd_width_adapter"
+Info: Reusing file C:/Users/Tobias/Desktop/13 - EV19_RISCV (integrado en Platform Designer)/EV19_SoC/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: Reusing file C:/Users/Tobias/Desktop/13 - EV19_RISCV (integrado en Platform Designer)/EV19_SoC/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: avalon_st_adapter_003: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter_003"
+Info: avalon_st_adapter_015: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter_015"
+Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
+Info: error_adapter_0: "avalon_st_adapter_003" instantiated error_adapter "error_adapter_0"
+Info: error_adapter_0: "avalon_st_adapter_015" instantiated error_adapter "error_adapter_0"
+Info: EV19_SoC: Done "EV19_SoC" with 56 modules, 106 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

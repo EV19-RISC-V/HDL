@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Tue Jul 02 03:20:48 2019
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : EV19_RISCV
+Top-level Entity Name : TopLevel
+Family : Cyclone IV E
+Total logic elements : 10,325
+    Total combinational functions : 8,980
+    Dedicated logic registers : 4,348
+Total registers : 4348
+Total pins : 74
+Total virtual pins : 0
+Total memory bits : 244,796
+Embedded Multiplier 9-bit elements : 16
+Total PLLs : 1

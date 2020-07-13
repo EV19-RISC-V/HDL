@@ -1,0 +1,15 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst Memory_Interface.Interface -pg 1 -lvl 3 -y 110
+preplace inst Memory_Interface -pg 1 -lvl 1 -y 40 -regy -20
+preplace inst Memory_Interface.Clock -pg 1 -lvl 1 -y 30
+preplace inst Memory_Interface.Reset -pg 1 -lvl 2 -y 50
+preplace inst Memory_Interface.RAM -pg 1 -lvl 4 -y 90
+preplace netloc EXPORT<net_container>Memory_Interface</net_container>(SLAVE)Memory_Interface.reset,(SLAVE)Reset.in_reset) 1 0 2 NJ 80 NJ
+preplace netloc EXPORT<net_container>Memory_Interface</net_container>(SLAVE)Memory_Interface.clk,(SLAVE)Clock.in_clk) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>Memory_Interface</net_container>(SLAVE)Interface.reset,(SLAVE)RAM.reset1,(MASTER)Reset.out_reset) 1 2 2 370 200 NJ
+preplace netloc FAN_OUT<net_container>Memory_Interface</net_container>(SLAVE)Reset.clk,(MASTER)Clock.out_clk,(SLAVE)Interface.clk,(SLAVE)RAM.clk1) 1 1 3 220 120 390 100 NJ
+preplace netloc POINT_TO_POINT<net_container>Memory_Interface</net_container>(MASTER)Interface.avalon_master,(SLAVE)RAM.s1) 1 3 1 N
+preplace netloc EXPORT<net_container>Memory_Interface</net_container>(SLAVE)Memory_Interface.bus,(SLAVE)Interface.external_interface) 1 0 3 NJ 140 NJ 140 NJ
+levelinfo -pg 1 0 50 770
+levelinfo -hier Memory_Interface 60 90 250 420 680 760
