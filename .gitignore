@@ -52,6 +52,9 @@
 !*.sof
 
 !*.cmd
+!*.pdf
+!*.png
+
 ## tbd
 
 !*.tcl
