@@ -37,26 +37,26 @@
 # software binary files
 
 /*
-!/*.gitignore
+!*.gitignore
 ##
-!/*.qpf
-!/*.qsf
-!/*.qws
-!/*.bdf
-!/*.vhd
-!/*.v
-!/*.ptf
-!/*.bsf
-!/**/class.ptf
-!/*.tbd
-!/*.sof
+!**.qpf
+!**.qsf
+!**.qws
+!**.bdf
+!**.vhd
+!**.v
+!**.ptf
+!**.bsf
+!**/class.ptf
+!**.tbd
+!**.sof
 
-!/*.cmd
-!/*.pdf
-!/*.png
-!/*.md
+!**.cmd
+!**.pdf
+!**.png
+!**.md
 ## tbd
 
-!*.tcl
+!**.tcl
 
-*.ini
+**.ini
