@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Mandelbrot&apos; to &apos;EV19 RISCV&apos;" description="Rename resource &apos;Mandelbrot&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Mandelbrot" name="EV19 RISCV" stamp="1562050985161" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;EV19 RISCV&apos; to &apos;EV19_RISCV&apos;" description="Rename resource &apos;EV19 RISCV&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/EV19 RISCV" name="EV19_RISCV" stamp="1562052635440" updateReferences="true"/>
-</session>

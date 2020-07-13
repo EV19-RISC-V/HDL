@@ -1,8 +1,0 @@
-   1              		.file	"ledTest.c"
-   2              		.option nopic
-   3              		.text
-   4              		.ident	"GCC: (GNU MCU Eclipse RISC-V Embedded GCC, 64-bit) 8.1.0"
-DEFINED SYMBOLS
-                            *ABS*:0000000000000000 ledTest.c
-
-NO UNDEFINED SYMBOLS

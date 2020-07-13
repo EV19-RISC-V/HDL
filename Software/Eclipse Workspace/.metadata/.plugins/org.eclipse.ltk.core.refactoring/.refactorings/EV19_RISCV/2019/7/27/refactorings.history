@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;EV19_RISCV/start.S&apos; to &apos;startup.S&apos;" description="Rename resource &apos;start.S&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="start.S" name="startup.S" stamp="1562054183520" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;EV19_RISCV/ls.ld&apos; to &apos;linkerScript.ld&apos;" description="Rename resource &apos;ls.ld&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="ls.ld" name="linkerScript.ld" stamp="1562054196155" updateReferences="true"/>
-</session>
